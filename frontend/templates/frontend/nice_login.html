@@ -1,0 +1,492 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log In - Curriculab</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f4f4;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 60px;
+      height: auto;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      color: white; 
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    /* Login content */
+    .login-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .login-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+      padding: 40px;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-header h1 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .login-header p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #04AA6D;
+      outline: none;
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+    }
+
+    .remember-me input {
+      margin-right: 8px;
+    }
+
+    .forgot-password {
+      color: #04AA6D;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    .form-submit {
+      margin-top: 10px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #04AA6D;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-btn:hover {
+      background-color: #028a5e;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 15px;
+      color: #666;
+    }
+
+    .signup-link a {
+      color: #04AA6D;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Social login section - IMPROVED */
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+    }
+
+    .divider hr {
+      flex: 1;
+      border: none;
+      height: 1px;
+      background-color: #ddd;
+    }
+
+    .divider span {
+      padding: 0 15px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .social-login {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 5px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      background-color: white;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      text-align: center;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .social-btn:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .google-btn {
+      color: #757575;
+    }
+
+    .facebook-btn {
+      color: #1877F2;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+    }
+
+    .google-icon {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M3.064 7.51A9.996 9.996 0 0 1 12 2c2.695 0 4.959.99 6.69 2.605l-2.867 2.868C14.786 6.482 13.468 5.977 12 5.977c-2.605 0-4.81 1.76-5.595 4.123-.2.6-.314 1.24-.314 1.9 0 .66.114 1.3.314 1.9.786 2.364 2.99 4.123 5.595 4.123 1.345 0 2.49-.355 3.386-.955a4.6 4.6 0 0 0 1.996-3.018H12v-3.868h9.418c.118.654.182 1.336.182 2.045 0 3.046-1.09 5.61-2.982 7.35C16.964 21.105 14.7 22 12 22A9.996 9.996 0 0 1 2 12c0-1.614.386-3.14 1.064-4.49z' fill='%234285F4'/%3E%3C/svg%3E") no-repeat center center;
+    }
+
+    .facebook-icon {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z' fill='%231877F2'/%3E%3C/svg%3E") no-repeat center center;
+    }
+
+    /* Footer Section */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 40px 20px 20px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .footer-section h4 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background-color: #04AA6D;
+    }
+
+    .footer-section p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: #f4f4f4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 16px;
+    }
+
+    .footer-links a:hover {
+      color: #04AA6D;
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+      padding: 8px 0;
+    }
+
+    .social-icon:hover {
+      color: #04AA6D;
+    }
+
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav ul {
+        margin-top: 15px;
+      }
+
+      .login-card {
+        padding: 30px 20px;
+      }
+
+      .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      /* Footer responsive adjustments */
+      .footer-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-section {
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .footer-links {
+        align-items: center;
+      }
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div>
+        <a href="{% url 'nice_landing_page' %}">
+            <span class="logo-text">Curriculab</span>
+        </a>
+    </div>
+    <ul>
+      <li><a href="{% url 'nice_signup' %}">Sign Up</a></li>
+      <li><a href="{% url 'nice_landing_page' %}">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Login Content -->
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>Welcome Back</h1>
+        <p>Log in to continue with Curriculab</p>
+      </div>
+      {% if messages %}
+      {% for message in messages %}
+          <div class="alert {{ message.tags }}" role="alert">
+              {{ message }}
+          </div>
+      {% endfor %}
+      {% endif %}
+      <form action="{% url 'nice_login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">User Name</label>
+          <input type="text" id="username" name="username" placeholder="Enter your user name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        
+        <div class="form-options">
+          <div class="remember-me">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember me</label>
+          </div>
+          <a href="#" class="forgot-password">Forgot Password?</a>
+        </div>
+        
+        <div class="form-submit">
+          <button type="submit" class="login-btn">Log In</button>
+        </div>
+      </form>
+      
+      <div class="signup-link">
+        <p>Don't have an account? <a href="#">Sign Up</a></p>
+      </div>
+      
+      <div class="divider">
+        <hr><span>OR</span><hr>
+      </div>
+      
+      <div class="social-login">
+        <button class="social-btn google-btn">
+          <span class="social-icon google-icon"></span>
+          Continue with Google
+        </button>
+        <button class="social-btn facebook-btn">
+          <span class="social-icon facebook-icon"></span>
+          Continue with Facebook
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Curriculab</h4>
+        <p>Your trusted platform to create a professional curriculum quickly and easily.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Links</h4>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" class="social-icon">Facebook</a>
+          <a href="#" class="social-icon">Twitter</a>
+          <a href="#" class="social-icon">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Curriculab. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

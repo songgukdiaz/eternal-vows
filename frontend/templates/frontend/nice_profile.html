@@ -1,0 +1,558 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Curriculab - My Profile</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f9f9f9;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      color: white;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .user-dropdown {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .user-dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .user-dropdown-content a {
+      color: #333 !important;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .user-dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .user-dropdown:hover .user-dropdown-content {
+      display: block;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #04AA6D;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .page-title {
+      font-size: 32px;
+      color: #333;
+    }
+
+    .save-button {
+      padding: 12px 24px;
+      background-color: #04AA6D;
+      color: white;
+      border: none;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .save-button:hover {
+      background-color: #028a5e;
+    }
+
+    /* Profile Section */
+    .profile-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 40px;
+    }
+    
+    .profile-sidebar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-picture-container {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+      border: 3px solid #f1f1f1;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-picture {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-picture-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      height: 0;
+      transition: .5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-picture-container:hover .profile-picture-overlay {
+      height: 40px;
+    }
+
+    .change-picture-btn {
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-input:focus {
+      border-color: #04AA6D;
+      outline: none;
+    }
+
+    .form-input[readonly] {
+      background-color: #f9f9f9;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    .form-input-hint {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Footer Section */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 40px 20px 20px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .footer-section h4 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background-color: #04AA6D;
+    }
+
+    .footer-section p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: #f4f4f4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 16px;
+    }
+
+    .footer-links a:hover {
+      color: #04AA6D;
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+      padding: 8px 0;
+    }
+
+    .social-icon:hover {
+      color: #04AA6D;
+    }
+
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-sidebar {
+        margin-bottom: 30px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      nav ul {
+        gap: 10px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-section {
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .footer-links {
+        align-items: center;
+      }
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div>
+      <a href="{% url 'nice_home' %}" class="logo-text">Curriculab</a>
+    </div>
+    <ul>
+      <li><a href="{% url 'nice_home' %}">Dashboard</a></li>
+      <li><a href="{% url 'nice_home' %}">Templates</a></li>
+      <li class="user-dropdown">
+        <div class="user-avatar">JD</div>
+        <div class="user-dropdown-content">
+          <a href="{% url 'nice_profile' %}">My Profile</a>
+          <a href="#">Account Settings</a>
+          <a href="#">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="page-header">
+      <h1 class="page-title">My Profile</h1>
+      <button type="submit" form="profile-form" class="save-button">Save Changes</button>
+    </div>
+
+    <div class="alert alert-success" id="save-alert">
+      Your profile has been updated successfully!
+    </div>
+
+    <div class="profile-container">
+      <form id="profile-form" onsubmit="saveProfile(event)">
+        <div class="profile-layout">
+          <div class="profile-sidebar">
+            <div class="profile-picture-container">
+              <img src="{% static 'images/profile-picture.jpg' %}" alt="Profile picture" class="profile-picture" id="profile-image-preview">
+              <div class="profile-picture-overlay">
+                <button type="button" class="change-picture-btn" onclick="document.getElementById('profile-image').click()">Change Photo</button>
+                <input type="file" id="profile-image" name="profile-image" accept="image/*" style="display: none;" onchange="previewImage(event)">
+              </div>
+            </div>
+            <p class="form-input-hint">Click on the image to change your profile picture</p>
+          </div>
+          
+          <div class="profile-info">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name" class="form-label">First Name</label>
+                <input type="text" id="first-name" name="first-name" class="form-input" value="John" required>
+              </div>
+              <div class="form-group">
+                <label for="last-name" class="form-label">Last Name</label>
+                <input type="text" id="last-name" name="last-name" class="form-input" value="Doe" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" id="email" name="email" class="form-input" value="john.doe@example.com" readonly>
+              <p class="form-input-hint">Your email address cannot be changed as it's used for account identification.</p>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="tel" id="phone" name="phone" class="form-input" value="(555) 123-4567">
+            </div>
+            
+            <div class="form-group">
+              <label for="job-title" class="form-label">Job Title</label>
+              <input type="text" id="job-title" name="job-title" class="form-input" value="Senior Product Designer">
+            </div>
+            
+            <div class="form-group">
+              <label for="location" class="form-label">Location</label>
+              <input type="text" id="location" name="location" class="form-input" value="San Francisco, CA">
+            </div>
+            
+            <div class="form-group">
+              <label for="linkedin" class="form-label">LinkedIn Profile</label>
+              <input type="url" id="linkedin" name="linkedin" class="form-input" value="https://linkedin.com/in/johndoe">
+            </div>
+            
+            <div class="form-group">
+              <label for="website" class="form-label">Personal Website</label>
+              <input type="url" id="website" name="website" class="form-input" value="https://johndoe.portfolio.com">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Curriculab</h4>
+        <p>Your trusted platform to create a professional curriculum quickly and easily.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Links</h4>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" class="social-icon">Facebook</a>
+          <a href="#" class="social-icon">Twitter</a>
+          <a href="#" class="social-icon">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Curriculab. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Preview the selected image
+    function previewImage(event) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          document.getElementById('profile-image-preview').src = e.target.result;
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    // Handle form submission
+    function saveProfile(event) {
+      event.preventDefault();
+      
+      // In a real application, you would send the form data to a server here
+      // For this demo, we'll just show a success message
+      const alert = document.getElementById('save-alert');
+      alert.style.display = 'block';
+      
+      // Hide the alert after 3 seconds
+      setTimeout(function() {
+        alert.style.display = 'none';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

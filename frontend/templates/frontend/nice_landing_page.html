@@ -1,0 +1,398 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landing Page</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 60px; /* Increased logo size */
+      height: auto;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+      height: 60%;
+      background-color: #f4f4f4;
+    }
+
+    header .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      gap: 70px;
+    }
+
+    header .text-content {
+      text-align: left;
+      max-width: 50%;
+    }
+
+    header .text-content h1 {
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    header .text-content p {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    .signup-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #04AA6D;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .signup-button:hover {
+      background-color: #028a5e;
+    }
+
+    header .image-content img {
+      width: 600px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* Features & Benefits Section */
+    .features {
+      background-color: #f9f9f9;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .features p {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+
+    .feature-list {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .feature-item {
+      background-color: #fff;
+      padding: 30px;
+      width: 250px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .feature-item h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .feature-item p {
+      font-size: 16px;
+    }
+
+    /* NEW Footer Section */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 40px 20px 20px;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .footer-section h4 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background-color: #04AA6D;
+    }
+
+    .footer-section p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: #f4f4f4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 16px;
+    }
+
+    .footer-links a:hover {
+      color: #04AA6D;
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+      padding: 8px 0;
+    }
+
+    .social-icon:hover {
+      color: #04AA6D;
+    }
+
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      header .content {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      header .text-content {
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav ul li {
+        margin-bottom: 10px;
+      }
+
+      header .image-content img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .feature-list {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Footer responsive adjustments */
+      .footer-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-section {
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .footer-links {
+        align-items: center;
+      }
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div>
+        <a href="{% url 'nice_landing_page' %}">
+            <span class="logo-text">Curriculab</span>
+        </a>
+    </div>
+    <ul>
+      <li><a href="{% url 'nice_login' %}">Log In</a></li>
+      <li><a href="{% url 'nice_signup' %}">Sign Up</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Header Section -->
+  <header>
+    <div class="content">
+      <div class="text-content">
+        <h1>Land Your Dream Job with the Perfect Resume</h1>
+        <p>Answer a few questions, choose a template, and download your professional resume in minutes.</p>
+        <a href="{% url 'nice_signup' %}" class="signup-button">Get Started</a>
+      </div>
+      <div class="image-content">
+        <img src="{% static 'images/curriculum3.png' %}" alt="Professional Resume">
+      </div>
+    </div>
+  </header>
+
+  <!-- Features & Benefits Section -->
+  <section class="features">
+    <h2>Features & Benefits</h2>
+    <p>Discover how Curriculab can help you create a professional curriculum effortlessly.</p>
+    <div class="feature-list">
+      <div class="feature-item">
+        <h3>Guided Questionnaire</h3>
+        <p>Answer simple questions to build your curriculum step by step.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Multiple Templates</h3>
+        <p>Choose from various templates to match your style and profession.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Instant Download</h3>
+        <p>Download your completed curriculum in your preferred format.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Time Efficiency</h3>
+        <p>Save time with our streamlined process, focusing on what matters.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Professional Quality</h3>
+        <p>Present yourself with a polished and professional curriculum.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Accessible Anywhere</h3>
+        <p>Create and download your curriculum from any device, anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section (UPDATED) -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Curriculab</h4>
+        <p>Your trusted platform to create a professional curriculum quickly and easily.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Links</h4>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" class="social-icon">Facebook</a>
+          <a href="#" class="social-icon">Twitter</a>
+          <a href="#" class="social-icon">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Curriculab. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
