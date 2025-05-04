@@ -13,6 +13,73 @@
             box-sizing: border-box;
             font-family: 'Cormorant Garamond', 'Times New Roman', serif;
         }
+        
+        /* FAQ Section Styles */
+        .faq-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f3e8ec;
+        }
+        
+        .faq-question {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 20px 15px;
+            position: relative;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: #d53f8c;
+        }
+        
+        .faq-icon {
+            font-size: 1.5rem;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 15px;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .faq-answer.show {
+            max-height: 1000px;
+            padding: 0 15px 20px;
+        }
+        
+        .faq-answer p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
 
         body {
             background: linear-gradient(to bottom, #fff5f7, #ffffff);
@@ -375,30 +442,30 @@
                 <img src="{% static 'images/pala_andres.png' %}" alt="Pala and Andres">
             </div>
             <div class="story-content">
-                <p>We met on a rainy afternoon at a small coffee shop downtown. What started as sharing a table turned into hours of conversation, laughter, and the beginning of our journey together.</p>
-                <p>Three years later, during a weekend trip to the mountains, surrounded by autumn leaves and the crisp fall air, we decided to spend forever together.</p>
-                <p>Now we're excited to celebrate our special day with our favorite people. We can't wait to share this moment with you.</p>
+                <p>Nos conocimos una tarde lluviosa en una pequeña cafetería del centro. Lo que empezó como compartir una mesa se convirtió en horas de conversación, risas y el comienzo de nuestro camino juntos.</p>
+                <p>Tres años después, durante un viaje de fin de semana a las montañas, rodeados de hojas de otoño y el aire fresco del otoño, decidimos pasar el resto de nuestras vidas juntos.</p>
+                <p>Ahora estamos emocionados de celebrar nuestro día especial con nuestras personas favoritas. No podemos esperar para compartir este momento contigo.</p>
             </div>
         </div>
     </section>
 
     <!-- Celebration Section -->
     <section class="section celebration">
-        <h2 class="section-title">The Celebration</h2>
+        <h2 class="section-title">La Celebración</h2>
         <div class="events">
             <div class="event-card">
                 <div class="event-icon">💍</div>
-                <h3 class="event-title">Ceremony</h3>
+                <h3 class="event-title">Cerimonia</h3>
                 <p class="event-details">4:00 PM</p>
                 <p class="event-details">Rosewood Gardens - Garden Pavilion</p>
-                <p>Join us as we exchange vows and begin our journey as a married couple.</p>
+                <p>Acompáñanos mientras intercambiamos nuestros votos y comenzamos nuestro camino como pareja casada.</p>
             </div>
             <div class="event-card">
                 <div class="event-icon">🥂</div>
-                <h3 class="event-title">Reception</h3>
+                <h3 class="event-title">Recepción</h3>
                 <p class="event-details">6:00 PM</p>
                 <p class="event-details">Rosewood Gardens - Grand Ballroom</p>
-                <p>Dinner, dancing, and celebration to follow the ceremony.</p>
+                <p>Después de la ceremonia, habrá cena, baile y celebración.</p>
             </div>
         </div>
     </section>
@@ -407,8 +474,8 @@
     <section class="spotify-section">
         <div class="spotify-container">
             <img src="{% static 'images/spotify-logo.png' %}" alt="Spotify" class="spotify-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png'; this.onerror=null;">
-            <h2 class="spotify-title">Our Wedding Playlist</h2>
-            <p class="spotify-description">We've curated a special playlist with songs that mean the world to us. These are the tunes that will be played during our celebration, and we wanted to share them with you ahead of time!</p>
+            <h2 class="spotify-title">Nuestra Lista de Reproducción de Boda</h2>
+            <p class="spotify-description">Hemos creado una lista de reproducción especial con canciones que significan mucho para nosotros. Estas son las melodías que sonarán durante nuestra celebración, ¡y queríamos compartirlas contigo con anticipación!</p>
             
             <!-- Spotify Iframe -->
             <div class="spotify-iframe-container">
@@ -429,32 +496,32 @@
 
     <!-- Dress Code Section -->
     <section class="section celebration">
-        <h2 class="section-title">Dress Code</h2>
+        <h2 class="section-title">Código de Vestimenta</h2>
         <div style="display: flex; flex-direction: column; align-items: center; max-width: 800px; margin: 0 auto;">
             <div style="margin-bottom: 30px;">
                 <img src="{% static 'images/dress_code.png' %}" alt="Formal Attire" style="max-width: 300px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
             </div>
             <div style="text-align: center; padding: 0 20px;">
-                <h3 style="font-size: 1.8rem; margin-bottom: 20px; font-weight: 400; color: #333;">Formal Attire</h3>
-                <p style="font-size: 1.1rem; color: #555; margin-bottom: 15px;">We kindly request formal attire for our celebration.</p>
-                <p style="font-size: 1.1rem; color: #555; margin-bottom: 15px;">For men: Suits or tuxedos preferred.</p>
-                <p style="font-size: 1.1rem; color: #555; margin-bottom: 15px;">For women: Formal dresses or elegant evening wear.</p>
-                <p style="font-size: 1.1rem; color: #555; font-style: italic;">Our venue features both indoor and outdoor spaces, so comfortable dress shoes are recommended.</p>
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px; font-weight: 400; color: #333;">Vestimenta Formal</h3>
+                <p style="font-size: 1.1rem; color: #555; margin-bottom: 15px;">Les pedimos amablemente vestimenta formal para nuestra celebración.</p>
+                <p style="font-size: 1.1rem; color: #555; margin-bottom: 15px;">Para los hombres: Se prefieren trajes o esmóquines.</p>
+                <p style="font-size: 1.1rem; color: #555; margin-bottom: 15px;">Para las mujeres: Vestidos formales o atuendos elegantes de noche.</p>
+                <p style="font-size: 1.1rem; color: #555; font-style: italic;">Nuestro lugar cuenta con espacios interiores y exteriores, por lo que se recomienda usar calzado cómodo.</p>
             </div>
         </div>
     </section>
 
     <!-- WhatsApp Contact Button -->
     <div style="margin-top: 40px; text-align: center;">
-        <p style="margin-bottom: 15px; font-size: 1.2rem;">Questions? Contact the coordinator:</p>
+        <p style="margin-bottom: 15px; font-size: 1.2rem;">¿Preguntas? Contacta al coordinador:</p>
         <a href="https://wa.me/573104109475" target="_blank" style="display: inline-flex; align-items: center; text-decoration: none; background-color: #25D366; color: white; font-size: 1.2rem; padding: 12px 30px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
             <img src="{% static 'images/whatsapp.jpg' %}" alt="WhatsApp" style="width: 40px; height: 40px; margin-right: 15px; border-radius: 50%;">
-            <span>Message on WhatsApp</span>
+            <span>Enviar mensaje por WhatsApp</span>
         </a>
     </div>
     <!-- Location Section -->
     <section class="section">
-        <h2 class="section-title">Venue Location</h2>
+        <h2 class="section-title">Ubicación</h2>
         <div class="map-container">
             <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1704605582384!2d-75.55493308463718!3d6.131703495561088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4683664b3effb3%3A0xf13f8c16c0fbbd33!2sForest%20campestre!5e0!3m2!1sen!2sus!4v1713742500856!5m2!1sen!2sus" 
@@ -469,13 +536,13 @@
         <div class="location-details" style="text-align: center; margin-top: 30px;">
             <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Forest Campestre</h3>
             <p style="color: #555;">Medellín, Colombia</p>
-            <a href="https://maps.google.com/?q=Forest+campestre+Medellin+Colombia" class="btn" style="margin-top: 20px;">Get Directions</a>
+            <a href="https://maps.google.com/?q=Forest+campestre+Medellin+Colombia" class="btn" style="margin-top: 20px;">Obtener Direcciones</a>
         </div>
     </section>
 
     <!-- Gallery Section -->
     <section class="section">
-        <h2 class="section-title">Our Moments</h2>
+        <h2 class="section-title">Nuestros Momentos</h2>
         <div class="gallery">
             <div class="gallery-item">
                 <img src="{% static 'images/our_moments1.png' %}" alt="Emma and James">
@@ -494,6 +561,180 @@
             </div>
             <div class="gallery-item">
                 <img src="{% static 'images/our_moments6.png' %}" alt="Emma and James">
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section celebration">
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <div class="faq-container" style="max-width: 900px; margin: 0 auto;">
+            
+            <!-- FAQ Item 1 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Cuál es el clima en Medellín?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Medellín tiene un clima primaveral durante todo el año, con temperaturas entre 22°C y 28°C. Durante el día suele ser cálido y por las noches puede refrescar un poco. Recomendamos llevar ropa ligera y una chaqueta liviana, por si acaso.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Qué tipo de ropa debo llevar para la boda?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>El código de vestimenta es <em>elegante/cóctel</em>.</p>
+                    <p>Para ellas: vestidos formales (cortos o largos) o conjuntos de noche.</p>
+                    <p>Para ellos: pantalón formal con camisa (el traje es opcional).</p>
+                    <p>Tip: Si la boda es al aire libre, evita tacones delgados que se hundan en el césped.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Es segura Medellín?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Sí, Medellín ha avanzado muchísimo en seguridad. Las zonas más recomendadas para moverse con tranquilidad son <em>El Poblado, Provenza, Laureles</em> y alrededores turísticos.</p>
+                    <p>Como en toda ciudad grande, sugerimos usar transporte confiable (Uber, DiDi o taxis autorizados), no mostrar objetos de valor y tener precauciones básicas.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Qué llevo en mi maleta para los otros días?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Colombia —y especialmente Medellín— se caracteriza por su excelente moda, así que aprovecha para ir de compras. Hay muchas marcas locales increíbles y centros comerciales modernos como <em>El Tesoro, Santa Fe, Oviedo</em> o <em>Viva Envigado</em>.</p>
+                    <p>Aquí lo esencial para tu viaje:</p>
+                    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 10px;">
+                        <li>Ropa fresca y cómoda para el día</li>
+                        <li>Zapatos para caminar</li>
+                        <li>Ropa de baño (por si visitas termales o una finca con piscina)</li>
+                        <li>Chaqueta liviana o impermeable (por si llueve)</li>
+                        <li>Bloqueador solar y repelente</li>
+                        <li>Algo más elegante para salidas nocturnas o cenas</li>
+                        <li>¡Espacio en la maleta para tus nuevas compras!</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 5 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Qué planes recomendamos en Medellín o alrededores?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <ul style="list-style-type: disc; padding-left: 20px;">
+                        <li><em>Comuna 13:</em> arte urbano, historia y mucha cultura</li>
+                        <li><em>Pueblito Paisa:</em> arquitectura tradicional con una vista panorámica</li>
+                        <li><em>Guatapé y la Piedra del Peñol:</em> colores, paisajes y aventura a solo 2 horas</li>
+                        <li><em>Santa Fe de Antioquia:</em> pueblo colonial con clima cálido</li>
+                        <li><em>Parque Arví:</em> ideal para caminatas y picnic en la naturaleza</li>
+                        <li><em>Zonas como Provenza o Laureles:</em> llenas de buenos restaurantes, cafés y tiendas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 6 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Y después de la boda?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>¡Como es Semana Santa, es el momento perfecto para seguir viajando por Colombia! Si tienes tiempo, te recomendamos extender tu viaje y conocer otros destinos increíbles:</p>
+                    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 10px;">
+                        <li><em>Cartagena:</em> murallas coloniales, playa y excelente gastronomía</li>
+                        <li><em>Eje Cafetero (Salento, Filandia, Valle de Cocora):</em> paisajes espectaculares y cultura cafetera</li>
+                        <li><em>Santa Marta y Parque Tayrona:</em> montañas, selva y mar en un solo lugar</li>
+                        <li><em>Villa de Leyva:</em> arquitectura colonial, tranquilidad y vino artesanal</li>
+                        <li><em>San Andrés:</em> playas caribeñas con mar de siete colores</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 7 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Dónde me puedo quedar?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Las mejores zonas para hospedarse en Medellín son:</p>
+                    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 10px;">
+                        <li><em>El Poblado:</em> moderno, seguro, con muchas opciones de restaurantes y tiendas</li>
+                        <li><em>Provenza:</em> ideal para quienes buscan vida nocturna, cafés y estilo</li>
+                        <li><em>Laureles:</em> una opción más tranquila, con buena oferta gastronómica y local</li>
+                    </ul>
+                    <p style="margin-top: 15px;">Muy pronto estaremos agregando <em>links directos a nuestros hoteles recomendados</em> en la sección "Alojamiento" de esta página. ¡Espéralos!</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 8 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Dónde será la ceremonia y la recepción?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Ambas se llevarán a cabo en Forest Campestre, ubicado en Medellín, Colombia.</p>
+                    <p>Habrá transporte disponible desde puntos estratégicos de la ciudad, o puedes llegar en tu propio vehículo (habrá parqueadero).</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 9 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿A qué hora debemos llegar?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Te recomendamos llegar al menos <em>30 minutos antes</em> de la ceremonia, que comenzará a las 4:00 PM.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 10 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Puedo llevar acompañante o niños?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Será una celebración <em>solo para adultos</em>. Gracias por entender que queremos que todos se relajen y disfruten al máximo.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 11 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Qué pasa si llueve?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>No te preocupes, tenemos un <em>plan alterno cubierto</em>. ¡La fiesta sigue sin importar el clima!</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 12 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Debo confirmar mi asistencia?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Sí, por favor confírmanos antes del 1 de febrero de 2026 en la sección "RSVP" de esta página. ¡Estamos felices de compartir este día contigo!</p>
+                </div>
             </div>
         </div>
     </section>
@@ -538,6 +779,32 @@
         
         // Initialize countdown
         updateCountdown();
+        
+        // FAQ accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    // Toggle active class on the question
+                    this.classList.toggle('active');
+                    
+                    // Get the answer associated with this question
+                    const answer = this.nextElementSibling;
+                    
+                    // Toggle show class on the answer
+                    answer.classList.toggle('show');
+                    
+                    // Close other open questions if needed
+                    faqQuestions.forEach(otherQuestion => {
+                        if (otherQuestion !== question) {
+                            otherQuestion.classList.remove('active');
+                            otherQuestion.nextElementSibling.classList.remove('show');
+                        }
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>
