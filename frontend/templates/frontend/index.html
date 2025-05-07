@@ -193,10 +193,10 @@
             <!-- End messages block -->
         <p>Por favor, ingresa el código de invitación que recibiste para acceder a los detalles de nuestra boda.</p>
 
-        <form id="codeForm" action="{% url 'eternalvows' %}" method="post">
+        <form id="codeForm" action="{% url 'index' %}" method="post">
             {% csrf_token %}
             <div class="input-group">
-                <input type="text" id="invitationCode" placeholder="Código de invitación" required autocomplete="off">
+                <input type="text" id="invitationCode" name="invitationCode" placeholder="Código de invitación" required autocomplete="off">
                 <div class="error-message" id="errorMessage">Código inválido. Por favor, intenta nuevamente.</div>
             </div>
             <button type="submit" class="btn">Continuar</button>

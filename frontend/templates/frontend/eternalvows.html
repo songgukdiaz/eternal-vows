@@ -538,6 +538,35 @@
         .hero {
             padding-top: 80px;
         }
+
+        .message-container {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 0 20px;
+            opacity: 1;
+        }
+
+        .alert {
+            padding: 12px 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            opacity: 0.9;
+            transition: opacity 0.5s ease-out; /* Smooth fade */
+            text-align: center;               /* Center text */
+            font-size: 2rem;    
+            border-radius: 20px;            /* Slightly bigger text */
+        }
+
+        .alert.success { background-color: #71907e; }
+        .alert.error { background-color: #e74c3c; }
+        .alert.warning { background-color: #f39c12; }
+        .alert.info { background-color: #3498db; }
+
+        .alert.fade-out {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -554,7 +583,15 @@
                 <h3>P&A</h3>
             </div>
         </div>
-        
+        {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <!-- Navigation menu that will expand when the hamburger is clicked -->
         <nav class="site-nav" id="siteNav">
             <div class="nav-header">
@@ -571,6 +608,7 @@
                 <li><a href="#gallery" class="nav-link">Galería</a></li>
                 <li><a href="#faq" class="nav-link">Q&A</a></li>
                 <li><a href="https://forms.gle/pPqgsLgPofgXn97C6" target="_blank" class="nav-link">RSVP</a></li>
+                <li><a href="{% url 'logout' %}" class="nav-link">Cerrar Sesión</a></li>
             </ul>
         </nav>
         <div class="menu-overlay" id="menuOverlay"></div>
@@ -1035,6 +1073,12 @@
                 });
             });
         });
+        setTimeout(() => {
+            document.querySelectorAll('.alert').forEach(alert => {
+                alert.classList.add('fade-out'); // Triggers the CSS fade
+                setTimeout(() => alert.remove(), 500); // Remove after fade completes
+            });
+        }, 1000); // Show for 1 second
     </script>
 </body>
 </html>
