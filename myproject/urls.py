@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('eternalvows', views.eternalvows, name="eternalvows"),
+    path('logout', views.logout, name="logout"),
 ]
