@@ -89,10 +89,11 @@
             background: #3D4A3F;
             color: #333;
             line-height: 1.6;
+            padding-top: 70px;
         }
 
         .hero {
-            height: 100vh;
+            height: calc(100vh - 70px);
             position: relative;
             display: flex;
             align-items: center;
@@ -376,7 +377,7 @@
             max-width: 100%;
         }
 
-        /* Fixed Topbar Styles */
+        /* Fixed Topbar Styles - UPDATED */
         .site-header {
             position: fixed;
             top: 0;
@@ -391,10 +392,10 @@
 
         .header-container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 0px 50px 0px auto;
             padding: 0 20px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -538,32 +539,6 @@
             .header-container {
                 padding: 0 15px;
             }
-        }
-
-        /* Add padding to body to account for fixed header */
-        body {
-            padding-top: 70px;
-        }
-
-        /* Adjust hero section */
-        .hero {
-            height: calc(100vh - 70px);
-        }
-
-        .header-container nav {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 10px;
-            margin-left: auto;
         }
     </style>
 </head>
