@@ -1,0 +1,782 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qué Hacer y Donde Ir - Paula & Andres Wedding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #3D4A3F;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 70px;
+        }
+
+        /* Fixed Header */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(61, 74, 63, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo h3 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .back-home {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #d53f8c;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #d53f8c;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 50vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .hero-content {
+            padding: 20px;
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .intro-text {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #fdfdfd;
+        }
+
+        .intro-text h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .intro-text p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .highlight-text {
+            font-style: italic;
+            color: #d53f8c;
+            font-weight: 500;
+        }
+
+        /* Section Containers */
+        .section-container {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #fdfdfd;
+            margin-bottom: 40px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .section-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            color: #d53f8c;
+        }
+
+        /* Restaurant Section */
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .restaurant-category {
+            background-color: #E7ECE9;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .restaurant-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #d53f8c;
+            padding-bottom: 10px;
+        }
+
+        .restaurant-list {
+            list-style: none;
+        }
+
+        .restaurant-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .restaurant-item:hover {
+            transform: translateX(5px);
+        }
+
+        .restaurant-name {
+            font-weight: 500;
+            color: #d53f8c;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .restaurant-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Shopping Section */
+        .shopping-section {
+            background-color: #E7ECE9;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .shopping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .shopping-category {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .shopping-category h4 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .shopping-list {
+            list-style: none;
+        }
+
+        .shopping-item {
+            margin-bottom: 12px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #d53f8c;
+        }
+
+        .shop-name {
+            font-weight: 500;
+            color: #d53f8c;
+            margin-bottom: 3px;
+        }
+
+        .shop-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Attractions Section */
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .attraction-card {
+            background-color: #E7ECE9;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .attraction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .attraction-name {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .attraction-description {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .attraction-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .detail-item {
+            background-color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .attraction-link {
+            display: inline-block;
+            background-color: #d53f8c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(213, 63, 140, 0.3);
+        }
+
+        .attraction-link:hover {
+            background-color: #b83378;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(213, 63, 140, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e241f;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-hashtag {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #d53f8c;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                padding: 60px 15px;
+            }
+
+            .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shopping-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .attractions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shopping-section {
+                padding: 30px 20px;
+            }
+
+            .attraction-card {
+                padding: 25px;
+            }
+
+            .restaurant-category {
+                padding: 25px;
+            }
+
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .site-logo h3 {
+                font-size: 1.6rem;
+            }
+
+            .back-home {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <h3>A&P</h3>
+            </div>
+            <a href="{% url 'eternalvows' %}" class="back-home">← Volver al Inicio</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="{% static 'images/wedding_background10.jpeg' %}" alt="Wedding Background" class="hero-background">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Qué Hacer y Donde Ir</h1>
+            <p class="hero-subtitle">Descubre lo mejor de Medellín</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="intro-text">
+            <h2>🌆 Guía rápida para disfrutar Medellín</h2>
+            <p>Medellín, conocida como la <span class="highlight-text">Ciudad de la Eterna Primavera</span>, combina cultura, naturaleza, arte urbano y una oferta gastronómica vibrante. Aquí te dejamos nuestras recomendaciones favoritas para aprovechar al máximo tu visita.</p>
+        </div>
+
+        <!-- Restaurants Section -->
+        <section class="section-container">
+            <h2 class="section-title">
+                <span class="section-icon">🍽️</span>
+                Restaurantes Recomendados
+            </h2>
+            <p style="text-align: center; color: #fdfdfd; font-size: 1.1rem; margin-bottom: 40px;">
+                Las mejores opciones gastronómicas en El Poblado y Provenza
+            </p>
+
+            <div class="restaurant-grid">
+                <!-- Colombian Cuisine -->
+                <div class="restaurant-category">
+                    <h3 class="category-title">Cocina Colombiana Moderna</h3>
+                    <ul class="restaurant-list">
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Carmen</div>
+                            <div class="restaurant-description">Alta cocina colombiana con técnica internacional.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Hato Viejo</div>
+                            <div class="restaurant-description">Comida típica paisa en un ambiente tradicional.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Alambique</div>
+                            <div class="restaurant-description">Cocina creativa con ambiente único en rooftop.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Idílico</div>
+                            <div class="restaurant-description">Fusión local con presentación moderna.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- International Cuisine -->
+                <div class="restaurant-category">
+                    <h3 class="category-title">Cocina Internacional</h3>
+                    <ul class="restaurant-list">
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Naan</div>
+                            <div class="restaurant-description">Comida india, deliciosa y con gran ambiente.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Halong</div>
+                            <div class="restaurant-description">Vietnamita fresco y auténtico.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Piqueo</div>
+                            <div class="restaurant-description">Cocina peruana contemporánea.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">La Provincia</div>
+                            <div class="restaurant-description">Mediterráneo elegante.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Opa!</div>
+                            <div class="restaurant-description">Griego moderno, ideal para cena casual con estilo.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Dinner with Ambiance -->
+                <div class="restaurant-category">
+                    <h3 class="category-title">Cena con Ambiente</h3>
+                    <ul class="restaurant-list">
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Oci.Mde</div>
+                            <div class="restaurant-description">Cocina de autor, carnes maduradas, coctelería top.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Madre</div>
+                            <div class="restaurant-description">Pizzas de masa madre, decoración bohemia.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">OCIÉNAGA</div>
+                            <div class="restaurant-description">Diseño impresionante y carta variada, muy de moda.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Healthy Options -->
+                <div class="restaurant-category">
+                    <h3 class="category-title">Opciones Saludables / Vegetarianas</h3>
+                    <ul class="restaurant-list">
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Herbario</div>
+                            <div class="restaurant-description">Vegetariano gourmet con platos creativos.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Botanika</div>
+                            <div class="restaurant-description">Opciones frescas y saludables en formato casual.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Bars -->
+                <div class="restaurant-category">
+                    <h3 class="category-title">Bares para Salir</h3>
+                    <ul class="restaurant-list">
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Delaire Sky Lounge</div>
+                            <div class="restaurant-description">Rooftop con vista, ideal para atardecer y tragos.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">Perro Negro</div>
+                            <div class="restaurant-description">Coctelería divertida, ambiente relajado.</div>
+                        </li>
+                        <li class="restaurant-item">
+                            <div class="restaurant-name">37 Park</div>
+                            <div class="restaurant-description">Bar tipo speakeasy con buena música y cocteles originales.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopping Section -->
+        <section class="section-container">
+            <h2 class="section-title">
+                <span class="section-icon">🛍️</span>
+                Compras en Medellín
+            </h2>
+            
+            <div class="shopping-section">
+                <div class="shopping-grid">
+                    <div class="shopping-category">
+                        <h4>Tiendas Locales y Diseño Colombiano</h4>
+                        <ul class="shopping-list">
+                            <li class="shopping-item">
+                                <div class="shop-name">Makeno</div>
+                                <div class="shop-description">Concept store con moda, decoración y arte local.</div>
+                            </li>
+                            <li class="shopping-item">
+                                <div class="shop-name">Ocho43</div>
+                                <div class="shop-description">Ropa, objetos y arte hechos en Medellín.</div>
+                            </li>
+                            <li class="shopping-item">
+                                <div class="shop-name">Caballo de Toya</div>
+                                <div class="shop-description">Artesanías tradicionales colombianas.</div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="shopping-category">
+                        <h4>Centros Comerciales Recomendados</h4>
+                        <ul class="shopping-list">
+                            <li class="shopping-item">
+                                <div class="shop-name">El Tesoro Parque Comercial</div>
+                                <div class="shop-description">Shopping, restaurantes y vista panorámica.</div>
+                            </li>
+                            <li class="shopping-item">
+                                <div class="shop-name">Centro Comercial Santa Fe</div>
+                                <div class="shop-description">Gran variedad de marcas internacionales.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attractions Section -->
+        <section class="section-container">
+            <h2 class="section-title">
+                <span class="section-icon">🌟</span>
+                Lugares Imperdibles
+            </h2>
+
+            <div class="attractions-grid">
+                <!-- Graffitour -->
+                <div class="attraction-card">
+                    <h3 class="attraction-name">Graffitour – Comuna 13</h3>
+                    <p class="attraction-description">
+                        Recorrido por la transformación cultural de una comunidad a través del arte urbano. Color, historia y música en una de las zonas más inspiradoras de la ciudad.
+                    </p>
+                    <a href="#" class="attraction-link">🔗 Agenda con Feel Medellín</a>
+                </div>
+
+                <!-- Botero Museum -->
+                <div class="attraction-card">
+                    <h3 class="attraction-name">Museo de Antioquia y Plaza Botero</h3>
+                    <p class="attraction-description">
+                        Alberga esculturas y obras del maestro Fernando Botero, en pleno centro de la ciudad.
+                    </p>
+                    <div class="attraction-details">
+                        <span class="detail-item">📍 Calle 52 #52–43</span>
+                    </div>
+                    <a href="#" class="attraction-link">🔗 Más info</a>
+                </div>
+
+                <!-- MAMM -->
+                <div class="attraction-card">
+                    <h3 class="attraction-name">Museo de Arte Moderno de Medellín (MAMM)</h3>
+                    <p class="attraction-description">
+                        Obras de Débora Arango y artistas contemporáneos en un espacio arquitectónicamente único.
+                    </p>
+                    <div class="attraction-details">
+                        <span class="detail-item">📍 Carrera 44 #19A–100</span>
+                    </div>
+                    <a href="#" class="attraction-link">🔗 Más info</a>
+                </div>
+
+                <!-- Botanical Garden -->
+                <div class="attraction-card">
+                    <h3 class="attraction-name">Jardín Botánico de Medellín</h3>
+                    <p class="attraction-description">
+                        Espacio natural con más de 1,000 especies de plantas, ideal para una caminata tranquila.
+                    </p>
+                    <div class="attraction-details">
+                        <span class="detail-item">📍 Calle 73 #51D–14</span>
+                    </div>
+                    <a href="#" class="attraction-link">🔗 Más info</a>
+                </div>
+
+                <!-- Piedra del Peñol -->
+                <div class="attraction-card">
+                    <h3 class="attraction-name">Piedra del Peñol y Guatapé</h3>
+                    <p class="attraction-description">
+                        Una escapada de 1h 45 min desde Medellín. Sube los 750 escalones de la Piedra para una vista increíble y visita Guatapé, el pueblo más colorido de Colombia.
+                    </p>
+                    <a href="#" class="attraction-link">🔗 Reserva el tour</a>
+                </div>
+
+                <!-- El Carmen de Viboral -->
+                <div class="attraction-card">
+                    <h3 class="attraction-name">El Carmen de Viboral</h3>
+                    <p class="attraction-description">
+                        Pueblo ceramista famoso por sus vajillas pintadas a mano con diseños florales. Ideal para comprar artesanías auténticas.
+                    </p>
+                    <a href="#" class="attraction-link">🔗 Reserva el tour</a>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div style="background-color: #E7ECE9; border-radius: 12px; padding: 30px; margin-top: 40px; text-align: center;">
+                <p style="color: #555; font-size: 1.1rem; line-height: 1.6;">
+                    Además, Medellín es una de las principales ciudades de Colombia, con excelente conectividad aérea y terrestre, lo que la convierte en un punto de partida ideal para explorar otros destinos icónicos como el <span class="highlight-text">Eje Cafetero, Cartagena o Santa Marta</span>, ya sea en avión o por carretera.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>¡Disfruta explorando nuestra hermosa ciudad!</p>
+            <p class="footer-hashtag">#PaulaAndAndres2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.restaurant-category, .attraction-card, .shopping-section').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Add hover effects to restaurant items
+        document.querySelectorAll('.restaurant-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#f8f9fa';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'white';
+            });
+        });
+    </script>
+</body>
+</html>
