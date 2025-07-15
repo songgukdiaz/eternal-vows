@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -87,8 +88,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #d53f8c 0%, #8b2f47 100%);
-            opacity: 0.9;
+            object-fit: cover;
+            opacity: 0.8;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
             z-index: -1;
         }
 
@@ -377,13 +388,14 @@
             <div class="site-logo">
                 <h3>A&P</h3>
             </div>
-            <a href="#" class="back-home">← Volver al Inicio</a>
+            <a href="{% url 'eternalvows' %}" class="back-home">← Volver al Inicio</a>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-background"></div>
+        <img src="{% static 'images/wedding_background10.jpeg' %}" alt="Wedding Background" class="hero-background">
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Itinerario</h1>
             <p class="hero-subtitle">Tres días llenos de amor y celebración</p>
