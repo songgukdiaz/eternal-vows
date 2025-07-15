@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerario - Paula & Andres Wedding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #3D4A3F;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 70px;
+        }
+
+        /* Fixed Header */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(61, 74, 63, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo h3 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .back-home {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #d53f8c;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #d53f8c;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 50vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d53f8c 0%, #8b2f47 100%);
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        .hero-content {
+            padding: 20px;
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .intro-text {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #fdfdfd;
+        }
+
+        .intro-text h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .intro-text p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Event Cards */
+        .events-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .event-day {
+            background-color: #E7ECE9;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-day:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d53f8c;
+        }
+
+        .day-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            color: #d53f8c;
+        }
+
+        .day-info h3 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .day-date {
+            font-size: 1.3rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .event-details {
+            display: grid;
+            gap: 25px;
+        }
+
+        .event-item {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #d53f8c;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .event-time {
+            font-size: 1.1rem;
+            color: #d53f8c;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .event-location {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .event-location a {
+            color: #d53f8c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .event-location a:hover {
+            text-decoration: underline;
+        }
+
+        .event-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .dress-code {
+            background-color: #fdf2f8;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .dress-code strong {
+            color: #d53f8c;
+        }
+
+        .dress-code-details {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .dress-code-details div {
+            margin-bottom: 5px;
+        }
+
+        .special-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-style: italic;
+            color: #856404;
+        }
+
+        .payment-info {
+            background-color: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            color: #155724;
+        }
+
+        .payment-info strong {
+            color: #0f5132;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e241f;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-hashtag {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #d53f8c;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                padding: 60px 15px;
+            }
+
+            .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            .intro-text p {
+                font-size: 1.1rem;
+            }
+
+            .event-day {
+                padding: 25px;
+            }
+
+            .day-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .day-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .event-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .event-time {
+                margin-top: 5px;
+            }
+
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .site-logo h3 {
+                font-size: 1.6rem;
+            }
+
+            .back-home {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <h3>A&P</h3>
+            </div>
+            <a href="#" class="back-home">← Volver al Inicio</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1>Itinerario</h1>
+            <p class="hero-subtitle">Tres días llenos de amor y celebración</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="intro-text">
+            <h2>Celebremos Juntos</h2>
+            <p>Te invitamos a acompañarnos en estos días especiales. Cada momento ha sido pensado para crear recuerdos inolvidables junto a nuestros seres queridos.</p>
+        </div>
+
+        <div class="events-container">
+            <!-- Thursday Event -->
+            <div class="event-day">
+                <div class="day-header">
+                    <div class="day-icon">🍻</div>
+                    <div class="day-info">
+                        <h3>Jueves 26 de Marzo</h3>
+                        <div class="day-date">Noche Cóctel de Bienvenida</div>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div>
+                                <div class="event-title">Cóctel de Bienvenida</div>
+                                <div class="event-location">
+                                    <strong>Andrés Carne de Res Medellín</strong><br>
+                                    Centro Comercial Rio Sur, Cra. 43A #6 Sur 26<br>
+                                    Medellín, Antioquia, Colombia
+                                    <a href="https://maps.google.com/?q=Andrés+Carne+de+Res+Medellín+Centro+Comercial+Rio+Sur" target="_blank">Ver en Google Maps</a>
+                                </div>
+                            </div>
+                            <div class="event-time">8:00 PM – 3:00 AM</div>
+                        </div>
+                        <div class="event-description">
+                            Únete a nosotros en una noche de cervezas para celebrar nuestra pre-boda. Disfruta de una bebida de bienvenida y aperitivos por nuestra cuenta.
+                        </div>
+                        <div class="special-note">
+                            <strong>Nota importante:</strong> Ten en cuenta que cualquier artículo adicional estará disponible para tu compra.
+                        </div>
+                        <div class="dress-code">
+                            <strong>Vestimenta:</strong> Casual arreglado con flow
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friday Event -->
+            <div class="event-day">
+                <div class="day-header">
+                    <div class="day-icon">☕</div>
+                    <div class="day-info">
+                        <h3>Viernes 27 de Marzo</h3>
+                        <div class="day-date">Tour El Secreto del Café</div>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div>
+                                <div class="event-title">Tour El Secreto del Café</div>
+                                <div class="event-location">
+                                    <strong>El Poblado</strong><br>
+                                    Cra. 43B #14-54, El Poblado<br>
+                                    Medellín, Antioquia, Colombia
+                                    <a href="https://maps.google.com/?q=Cra.+43B+14-54+El+Poblado+Medellín" target="_blank">Ver en Google Maps</a>
+                                </div>
+                            </div>
+                            <div class="event-time">9:00 AM – 3:00 PM</div>
+                        </div>
+                        <div class="event-description">
+                            Descubre los secretos del café colombiano en esta experiencia única. Aprende sobre el proceso de cultivo, tostado y preparación del mejor café del mundo.
+                        </div>
+                        <div class="payment-info">
+                            <strong>Actividad opcional:</strong> Esta actividad corre por cuenta de cada quien. La información para el pago estará disponible próximamente.
+                        </div>
+                        <div class="dress-code">
+                            <strong>Vestimenta:</strong> Cómoda, tenis recomendados
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saturday Event -->
+            <div class="event-day">
+                <div class="day-header">
+                    <div class="day-icon">💒</div>
+                    <div class="day-info">
+                        <h3>Sábado 28 de Marzo</h3>
+                        <div class="day-date">El Gran Día</div>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div>
+                                <div class="event-title">Ceremonia Simbólica</div>
+                                <div class="event-location">
+                                    <strong>Forest Campestre</strong><br>
+                                    Medellín, Colombia
+                                    <a href="https://maps.google.com/?q=Forest+Campestre+Medellín" target="_blank">Ver en Google Maps</a>
+                                </div>
+                            </div>
+                            <div class="event-time">3:30 PM – 5:00 PM</div>
+                        </div>
+                        <div class="event-description">
+                            Acompáñanos en este momento mágico mientras intercambiamos nuestros votos de amor eterno, rodeados de la naturaleza y nuestros seres queridos.
+                        </div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div>
+                                <div class="event-title">Cóctel de Celebración</div>
+                                <div class="event-location">
+                                    <strong>Forest Campestre</strong><br>
+                                    Jardines del venue
+                                </div>
+                            </div>
+                            <div class="event-time">5:00 PM – 6:00 PM</div>
+                        </div>
+                        <div class="event-description">
+                            Brindemos juntos con deliciosos cócteles y aperitivos mientras celebramos nuestra unión en los hermosos jardines del venue.
+                        </div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div>
+                                <div class="event-title">Fiesta y Recepción</div>
+                                <div class="event-location">
+                                    <strong>Forest Campestre</strong><br>
+                                    Salón principal
+                                </div>
+                            </div>
+                            <div class="event-time">7:00 PM – 2:00 AM</div>
+                        </div>
+                        <div class="event-description">
+                            La noche más especial de nuestras vidas. Cena, baile, música y mucha diversión hasta altas horas de la madrugada.
+                        </div>
+                    </div>
+
+                    <div class="dress-code">
+                        <strong>Vestimenta: Formal</strong>
+                        <div class="dress-code-details">
+                            <div><strong>Hombres:</strong> Traje con corbata</div>
+                            <div><strong>Mujeres:</strong> Vestido largo de colores sólidos, preferiblemente con zapatos de tacón grueso debido a que hay partes con pasto</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>¡Estamos emocionados de celebrar estos momentos especiales contigo!</p>
+            <p class="footer-hashtag">#PaulaAndAndres2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all event cards
+        document.querySelectorAll('.event-day').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

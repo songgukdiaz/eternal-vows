@@ -560,14 +560,14 @@
                 <nav>
                     <ul class="main-nav" id="mainNav">
                         <li><a href="https://forms.gle/pPqgsLgPofgXn97C6" target="_blank" class="nav-link">RSVP</a></li>
-                        <li><a href="#our-story" class="nav-link">BIENVENIDA</a></li>
-                        <li><a href="#celebration" class="nav-link">ITINERARIO</a></li>
-                        <li><a href="#spotify" class="nav-link">VIAJE Y ALOJAMIENTO</a></li>
-                        <li><a href="#dress-code" class="nav-link">QUE HACER Y DONDE IR</a></li>
-                        <li><a href="#location" class="nav-link">NUESTRO DESEO</a></li>
-                        <li><a href="#gallery" class="nav-link">GALERIA</a></li>
-                        <li><a href="#faq" class="nav-link">PREGUNTAS FRECUENTES</a></li>
-                        <li><a href="#" class="nav-link">Cerrar Sesión</a></li>
+                        <li><a href="bienvenida" class="nav-link">BIENVENIDA</a></li>
+                        <li><a href="{% url 'itinerario' %}" class="nav-link">ITINERARIO</a></li>
+                        <li><a href="{% url 'viaje_y_alojamiento' %}" class="nav-link">VIAJE Y ALOJAMIENTO</a></li>
+                        <li><a href="{% url 'que_hacer_y_donde_ir' %}" class="nav-link">QUE HACER Y DONDE IR</a></li>
+                        <li><a href="{% url 'nuestro_deseo' %}" class="nav-link">NUESTRO DESEO</a></li>
+                        <li><a href="{% url 'galeria' %}" class="nav-link">GALERIA</a></li>
+                        <li><a href="{% url 'preguntas_frecuentes' %}" class="nav-link">PREGUNTAS FRECUENTES</a></li>
+                        <li><a href="{% url 'logout' %}" class="nav-link">Cerrar Sesión</a></li>
                     </ul>
                 </nav>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
