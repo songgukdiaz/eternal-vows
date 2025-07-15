@@ -228,7 +228,7 @@
         }
 
         .celebration {
-            background-color: #3D4A3F; /* Soft Sage Green */
+            background-color: #3D4A3F;
             text-align: center;
         }
 
@@ -289,7 +289,7 @@
         }
 
         footer {
-            background-color: #1e241f; /* Deep Teal */
+            background-color: #1e241f;
             color: white;
             text-align: center;
             padding: 40px 20px;
@@ -306,7 +306,7 @@
 
         /* Spotify Section Styles */
         .spotify-section {
-            background-color: #3D4A3F; /* Deep Teal */
+            background-color: #3D4A3F;
             text-align: center;
             padding: 100px 20px;
         }
@@ -376,8 +376,137 @@
             max-width: 100%;
         }
 
-        /* Responsive styles */
+        /* Fixed Topbar Styles */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(61, 74, 63, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo h3 {
+            color: white;
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+
+        .main-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #d53f8c;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .message-container {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .alert {
+            padding: 12px 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            opacity: 0.9;
+            transition: opacity 0.5s ease-out;
+            text-align: center;
+            font-size: 1.2rem;
+            border-radius: 20px;
+        }
+
+        .alert.success { background-color: #71907e; }
+        .alert.error { background-color: #e74c3c; }
+        .alert.warning { background-color: #f39c12; }
+        .alert.info { background-color: #3498db; }
+
+        .alert.fade-out {
+            opacity: 0;
+        }
+
+        /* Mobile Styles */
         @media (max-width: 768px) {
+            .main-nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(61, 74, 63, 0.98);
+                flex-direction: column;
+                padding: 20px 0;
+                gap: 0;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .main-nav.active {
+                transform: translateY(0);
+            }
+
+            .main-nav li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-link {
+                display: block;
+                padding: 15px 20px;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
             h1 {
                 font-size: 3rem;
             }
@@ -405,214 +534,64 @@
             .spotify-container {
                 padding: 30px 20px;
             }
+
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .main-nav {
+                gap: 0;
+            }
         }
 
-        .site-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        padding: 20px;
+        /* Add padding to body to account for fixed header */
+        body {
+            padding-top: 70px;
         }
-        
-        .menu-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .site-logo h3 {
-            color: white;
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 300;
-        }
-        
-        .menu-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
-        }
-        
-        .menu-icon {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 20px;
-        }
-        
-        .menu-icon span {
-            display: block;
-            height: 2px;
-            width: 100%;
-            background-color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .site-nav {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            max-width: 320px;
-            height: 100%;
-            background-color: #3D4A3F;
-            z-index: 1002;
-            transition: left 0.3s ease;
-            overflow-y: auto;
-            padding: 20px 0;
-        }
-        
-        .site-nav.active {
-            left: 0;
-        }
-        
-        .nav-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
-        }
-        
-        .nav-header h3 {
-            color: white;
-            margin: 0;
-            font-weight: 300;
-        }
-        
-        .close-menu {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 0;
-        }
-        
-        .nav-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .nav-menu li {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .nav-link {
-            display: block;
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            display: none;
-        }
-        
-        .menu-overlay.active {
-            display: block;
-        }
-        
-        /* Add appropriate padding to the hero section to account for fixed header */
+
+        /* Adjust hero section */
         .hero {
-            padding-top: 80px;
-        }
-
-        .message-container {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 0 20px;
-            opacity: 1;
-        }
-
-        .alert {
-            padding: 12px 20px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            color: white;
-            font-weight: bold;
-            opacity: 0.9;
-            transition: opacity 0.5s ease-out; /* Smooth fade */
-            text-align: center;               /* Center text */
-            font-size: 2rem;    
-            border-radius: 20px;            /* Slightly bigger text */
-        }
-
-        .alert.success { background-color: #71907e; }
-        .alert.error { background-color: #e74c3c; }
-        .alert.warning { background-color: #f39c12; }
-        .alert.info { background-color: #3498db; }
-
-        .alert.fade-out {
-            opacity: 0;
+            height: calc(100vh - 70px);
+            margin-top: 70px;
         }
     </style>
 </head>
 <body>
+    <!-- Fixed Header -->
     <header class="site-header">
-        <div class="menu-container">
-            <button class="menu-toggle">
-                <div class="menu-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
+        <div class="header-container">
             <div class="site-logo">
                 <h3>A&P</h3>
             </div>
+            <nav>
+                <ul class="main-nav" id="mainNav">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#our-story" class="nav-link">Nuestra Historia</a></li>
+                    <li><a href="#celebration" class="nav-link">La Celebración</a></li>
+                    <li><a href="#spotify" class="nav-link">Nuestra Playlist</a></li>
+                    <li><a href="#dress-code" class="nav-link">Código de Vestimenta</a></li>
+                    <li><a href="#location" class="nav-link">Ubicación</a></li>
+                    <li><a href="#gallery" class="nav-link">Galería</a></li>
+                    <li><a href="#faq" class="nav-link">Q&A</a></li>
+                    <li><a href="https://forms.gle/pPqgsLgPofgXn97C6" target="_blank" class="nav-link">RSVP</a></li>
+                    <li><a href="{% url 'logout' %}" class="nav-link">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
         </div>
-        {% if messages %}
-            <div class="message-container">
-                {% for message in messages %}
-                    <div class="alert {{ message.tags }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        <!-- Navigation menu that will expand when the hamburger is clicked -->
-        <nav class="site-nav" id="siteNav">
-            <div class="nav-header">
-                <button class="close-menu">×</button>
-                <h3>Menú</h3>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#our-story" class="nav-link">Nuestra Historia</a></li>
-                <li><a href="#celebration" class="nav-link">La Celebración</a></li>
-                <li><a href="#spotify" class="nav-link">Nuestra Playlist</a></li>
-                <li><a href="#dress-code" class="nav-link">Código de Vestimenta</a></li>
-                <li><a href="#location" class="nav-link">Ubicación</a></li>
-                <li><a href="#gallery" class="nav-link">Galería</a></li>
-                <li><a href="#faq" class="nav-link">Q&A</a></li>
-                <li><a href="https://forms.gle/pPqgsLgPofgXn97C6" target="_blank" class="nav-link">RSVP</a></li>
-                <li><a href="{% url 'logout' %}" class="nav-link">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-        <div class="menu-overlay" id="menuOverlay"></div>
     </header>
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="message-container">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <img src="{% static 'images/wedding_background10.jpeg' %}" alt="Wedding Background" class="hero-background">
@@ -727,6 +706,7 @@
             <span>Enviar mensaje por WhatsApp</span>
         </a>
     </div>
+
     <!-- Location Section -->
     <section class="section" id="location">
         <h2 class="section-title">Ubicación</h2>
@@ -1014,56 +994,42 @@
             });
         });
 
-        // Menu and smooth scrolling functionality
+        // Mobile menu toggle and smooth scrolling
         document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const closeMenu = document.querySelector('.close-menu');
-            const siteNav = document.getElementById('siteNav');
-            const menuOverlay = document.getElementById('menuOverlay');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainNav = document.getElementById('mainNav');
             const navLinks = document.querySelectorAll('.nav-link');
             
-            // Function to open menu
-            function openMenu() {
-                siteNav.classList.add('active');
-                menuOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
-            }
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                // Change hamburger icon
+                this.innerHTML = mainNav.classList.contains('active') ? '✕' : '☰';
+            });
             
-            // Function to close menu
-            function closeMenuFunc() {
-                siteNav.classList.remove('active');
-                menuOverlay.classList.remove('active');
-                document.body.style.overflow = ''; // Re-enable scrolling
-            }
-            
-            // Event listeners
-            menuToggle.addEventListener('click', openMenu);
-            closeMenu.addEventListener('click', closeMenuFunc);
-            menuOverlay.addEventListener('click', closeMenuFunc);
-            
-            // Handle smooth scrolling for internal links
+            // Handle navigation clicks
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    // Only process internal links (not external links like RSVP)
                     const href = this.getAttribute('href');
+                    
+                    // Only handle internal links
                     if (href.startsWith('#')) {
                         e.preventDefault();
                         
-                        // Close the menu
-                        closeMenuFunc();
+                        // Close mobile menu if open
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuToggle.innerHTML = '☰';
+                        }
                         
-                        // Get the target section
+                        // Smooth scroll to section
                         const targetId = href.substring(1);
                         const targetSection = document.getElementById(targetId);
                         
                         if (targetSection) {
-                            // Calculate header height for offset
-                            const headerHeight = document.querySelector('.site-header').offsetHeight;
-                            
-                            // Calculate the position to scroll to (with offset for fixed header)
+                            const headerHeight = 70; // Fixed header height
                             const offsetPosition = targetSection.offsetTop - headerHeight;
                             
-                            // Scroll smoothly to the target
                             window.scrollTo({
                                 top: offsetPosition,
                                 behavior: 'smooth'
@@ -1072,13 +1038,23 @@
                     }
                 });
             });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('header') && mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    mobileMenuToggle.innerHTML = '☰';
+                }
+            });
         });
+
+        // Message fade out
         setTimeout(() => {
             document.querySelectorAll('.alert').forEach(alert => {
-                alert.classList.add('fade-out'); // Triggers the CSS fade
-                setTimeout(() => alert.remove(), 500); // Remove after fade completes
+                alert.classList.add('fade-out');
+                setTimeout(() => alert.remove(), 500);
             });
-        }, 1000); // Show for 1 second
+        }, 3000);
     </script>
 </body>
 </html>
