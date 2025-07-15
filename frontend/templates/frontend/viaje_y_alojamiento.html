@@ -1,0 +1,634 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viaje y Alojamiento - Paula & Andres Wedding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #3D4A3F;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 70px;
+        }
+
+        /* Fixed Header */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(61, 74, 63, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo h3 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .back-home {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #d53f8c;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #d53f8c;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 50vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .hero-content {
+            padding: 20px;
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .intro-text {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #fdfdfd;
+        }
+
+        .intro-text h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .intro-text p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Section Containers */
+        .section-container {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #fdfdfd;
+            margin-bottom: 40px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .section-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            color: #d53f8c;
+        }
+
+        /* Flight Section */
+        .flight-info {
+            background-color: #E7ECE9;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .flight-item {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #d53f8c;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .flight-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .flight-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .flight-description {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #d53f8c;
+            font-weight: 500;
+        }
+
+        /* Hotel Section */
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .hotel-card {
+            background-color: #E7ECE9;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .hotel-category {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: #d53f8c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .hotel-name {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #333;
+            margin: 20px 0 10px 0;
+        }
+
+        .hotel-description {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .hotel-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .hotel-features li {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .hotel-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #d53f8c;
+            font-weight: bold;
+        }
+
+        .hotel-button {
+            display: inline-block;
+            background-color: #d53f8c;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(213, 63, 140, 0.3);
+        }
+
+        .hotel-button:hover {
+            background-color: #b83378;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(213, 63, 140, 0.4);
+        }
+
+        /* Airbnb Section */
+        .airbnb-section {
+            background-color: #E7ECE9;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .airbnb-title {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .airbnb-description {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .airbnb-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .airbnb-button {
+            display: inline-block;
+            background-color: #FF5A5F;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.3);
+        }
+
+        .airbnb-button:hover {
+            background-color: #e4484d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 90, 95, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e241f;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-hashtag {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #d53f8c;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                padding: 60px 15px;
+            }
+
+            .intro-text h2 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .hotels-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .hotel-card {
+                padding: 25px;
+            }
+
+            .flight-info {
+                padding: 30px 20px;
+            }
+
+            .airbnb-section {
+                padding: 30px 20px;
+            }
+
+            .airbnb-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .site-logo h3 {
+                font-size: 1.6rem;
+            }
+
+            .back-home {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <h3>A&P</h3>
+            </div>
+            <a href="{% url 'eternalvows' %}" class="back-home">← Volver al Inicio</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="{% static 'images/wedding_background10.jpeg' %}" alt="Wedding Background" class="hero-background">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Viaje y Alojamiento</h1>
+            <p class="hero-subtitle">Tu guía completa para llegar y hospedarte en Medellín</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="intro-text">
+            <h2>Bienvenidos a Medellín</h2>
+            <p>Hemos preparado toda la información que necesitas para que tu viaje a nuestra boda sea perfecto. Desde vuelos hasta las mejores opciones de hospedaje en la ciudad.</p>
+        </div>
+
+        <!-- Flights Section -->
+        <section class="section-container">
+            <h2 class="section-title">
+                <span class="section-icon">✈️</span>
+                Vuelos y Llegada a Medellín
+            </h2>
+            
+            <div class="flight-info">
+                <div class="flight-item">
+                    <h3 class="flight-title">Aeropuerto recomendado</h3>
+                    <p class="flight-description">
+                        El aeropuerto principal para llegar a Medellín es el <span class="highlight">Aeropuerto Internacional José María Córdova (MDE)</span>, ubicado a aproximadamente 45 minutos del centro de la ciudad.
+                    </p>
+                </div>
+
+                <div class="flight-item">
+                    <h3 class="flight-title">Desde Ciudad de México (CDMX)</h3>
+                    <p class="flight-description">
+                        Existen vuelos directos desde el Aeropuerto Internacional de Ciudad de México (MEX) a Medellín (MDE) con varias aerolíneas, incluyendo <span class="highlight">Avianca, Aeroméxico y Viva Aerobus</span>. Esto facilita mucho la conexión directa sin escalas.
+                    </p>
+                </div>
+
+                <div class="flight-item">
+                    <h3 class="flight-title">Desde Bogotá</h3>
+                    <p class="flight-description">
+                        Si viajas desde Bogotá, también hay múltiples vuelos diarios hacia Medellín que duran alrededor de 1 hora, operados por aerolíneas como <span class="highlight">Avianca y LATAM</span>.
+                    </p>
+                </div>
+
+                <div class="flight-item">
+                    <h3 class="flight-title">Seguimiento y reservas</h3>
+                    <p class="flight-description">
+                        Para encontrar las mejores tarifas y hacer seguimiento a tus vuelos, te recomendamos usar <span class="highlight">Google Flights</span> donde podrás comparar horarios y precios fácilmente.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hotels Section -->
+        <section class="section-container">
+            <h2 class="section-title">
+                <span class="section-icon">🏨</span>
+                Opciones de Hospedaje en Medellín
+            </h2>
+            <p style="text-align: center; color: #fdfdfd; font-size: 1.1rem; margin-bottom: 40px;">
+                Las mejores opciones en Provenza y El Poblado
+            </p>
+
+            <div class="hotels-grid">
+                <!-- Budget Option -->
+                <div class="hotel-card">
+                    <div class="hotel-category">Bueno, bonito y barato</div>
+                    <h3 class="hotel-name">Hotel Estelar Blue</h3>
+                    <p class="hotel-description">
+                        Un hotel cómodo y funcional con buena ubicación en El Poblado, ideal para quienes buscan calidad sin gastar mucho.
+                    </p>
+                    <ul class="hotel-features">
+                        <li>Habitaciones modernas y limpias</li>
+                        <li>Desayuno incluido</li>
+                        <li>Fácil acceso a transporte y restaurantes</li>
+                    </ul>
+                    <a href="#" class="hotel-button">Reservar Hotel Estelar Blue</a>
+                </div>
+
+                <!-- Mid-range Option -->
+                <div class="hotel-card">
+                    <div class="hotel-category">Medio presupuesto y lindo</div>
+                    <h3 class="hotel-name">Lettera Hotel</h3>
+                    <p class="hotel-description">
+                        Hotel boutique moderno, tranquilo y bien ubicado cerca de Provenza, a solo 5 minutos en auto del centro de El Poblado.
+                    </p>
+                    <ul class="hotel-features">
+                        <li>Habitaciones amplias y confortables</li>
+                        <li>Ambiente relajado y diseño contemporáneo</li>
+                        <li>Perfecto para descansar y estar cerca de la acción</li>
+                    </ul>
+                    <a href="#" class="hotel-button">Reservar Lettera Hotel</a>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: #666; font-style: italic;">
+                        Para reservar, contacta vía WhatsApp mencionando la boda de Paula y Andres.
+                    </p>
+                </div>
+
+                <!-- Luxury Option -->
+                <div class="hotel-card">
+                    <div class="hotel-category">Más lujoso</div>
+                    <h3 class="hotel-name">El Zarzo Hotel</h3>
+                    <p class="hotel-description">
+                        Hotel boutique de lujo en Provenza, famoso por su estilo elegante y su restaurante Cocina 33, uno de los mejores de Medellín.
+                    </p>
+                    <ul class="hotel-features">
+                        <li>Habitaciones exclusivas y diseño sofisticado</li>
+                        <li>Excelente ubicación en el corazón de Provenza</li>
+                        <li>Ideal para quienes quieren disfrutar de una experiencia más premium</li>
+                    </ul>
+                    <a href="#" class="hotel-button">Reservar El Zarzo Hotel</a>
+                </div>
+            </div>
+
+            <!-- Airbnb Section -->
+            <div class="airbnb-section">
+                <h3 class="airbnb-title">Airbnb</h3>
+                <p class="airbnb-description">
+                    Si prefieres una experiencia más local y con mayor flexibilidad, y mejores precios te recomendamos buscar opciones en Airbnb en las zonas de El Poblado y Provenza.
+                </p>
+                <ul class="hotel-features" style="max-width: 600px; margin: 0 auto 30px auto;">
+                    <li>Excelente acceso a restaurantes, bares y vida nocturna</li>
+                    <li>Ideal para grupos o estancias más largas</li>
+                </ul>
+                <div class="airbnb-buttons">
+                    <a href="https://www.airbnb.com/s/El-Poblado--Medell%C3%ADn--Antioquia--Colombia" target="_blank" class="airbnb-button">Explorar Airbnb en El Poblado</a>
+                    <a href="https://www.airbnb.com/s/Provenza--Medell%C3%ADn--Antioquia--Colombia" target="_blank" class="airbnb-button">Explorar Airbnb en Provenza</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>¡Esperamos verte pronto en Medellín!</p>
+            <p class="footer-hashtag">#PaulaAndAndres2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all hotel cards and flight items
+        document.querySelectorAll('.hotel-card, .flight-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
