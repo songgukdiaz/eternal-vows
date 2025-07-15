@@ -392,16 +392,17 @@
 
         .header-container {
             max-width: 1200px;
-            margin: 0px 50px 0px auto;
+            margin-left: auto;
+            margin-right: 0;
             padding: 0 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
         }
 
         .site-logo h3 {
             color: white;
-            margin: 0;
+            margin-right: 0;
             font-size: 2rem;
             font-weight: 300;
         }
@@ -411,18 +412,19 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: 30px;
+            gap: 20px;
         }
 
         .nav-link {
             color: white;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 400;
             transition: color 0.3s ease;
-            padding: 8px 15px;
+            padding: 8px 12px;
             border-radius: 25px;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
