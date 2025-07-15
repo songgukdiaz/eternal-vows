@@ -23,4 +23,11 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('eternalvows', views.eternalvows, name="eternalvows"),
     path('logout', views.logout, name="logout"),
+    path('bienvenida', views.bienvenida, name="bienvenida"),
+    path('itinerario', views.itinerario, name="itinerario"),
+    path('viaje-y-alojamiento', views.viaje_y_alojamiento, name="viaje_y_alojamiento"),
+    path('que-hacer-y-donde-ir', views.que_hacer_y_donde_ir, name="que_hacer_y_donde_ir"),
+    path('nuestro-deseo', views.nuestro_deseo, name="nuestro_deseo"),
+    path('galeria', views.galeria, name="galeria"),
+    path('preguntas-frecuentes', views.preguntas_frecuentes, name="preguntas_frecuentes"),
 ]

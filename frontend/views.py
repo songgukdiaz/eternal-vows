@@ -50,3 +50,24 @@ def logout(request):
         del request.session['invitation_code']
     
     return redirect('index')
+
+def bienvenida(request):
+    return render(request, 'frontend/bienvenida.html')
+
+def itinerario(request):
+    return render(request, 'frontend/itinerario.html')
+
+def viaje_y_alojamiento(request):
+    return render(request, 'frontend/viaje_y_alojamiento.html')
+
+def que_hacer_y_donde_ir(request):
+    return render(request, 'frontend/que_hacer_y_donde_ir.html')
+
+def nuestro_deseo(request):
+    return render(request, 'frontend/nuestro_deseo.html')
+
+def galeria(request):
+    return render(request, 'frontend/galeria.html')
+
+def preguntas_frecuentes(request):
+    return render(request, 'frontend/preguntas_frecuentes.html')
