@@ -92,6 +92,30 @@
             padding-top: 70px;
         }
 
+        /* Prevent body scroll when menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        /* Overlay to close menu when clicking outside */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .hero {
             height: calc(100vh - 70px);
             position: relative;
@@ -377,7 +401,7 @@
             max-width: 100%;
         }
 
-        /* Fixed Topbar Styles - UPDATED */
+        /* Fixed Topbar Styles - IMPROVED */
         .site-header {
             position: fixed;
             top: 0;
@@ -394,14 +418,21 @@
             max-width: 1200px;
             padding: 0 20px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
+
         .site-logo h3 {
             color: white;
             font-size: 2rem;
             font-weight: 300;
             margin: 0;
-            margin-right: 475px;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            margin: 0 250px;
         }
 
         .main-nav {
@@ -437,6 +468,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             padding: 10px;
+            margin-left: 20px;
         }
 
         .message-container {
@@ -471,52 +503,68 @@
             opacity: 0;
         }
 
-        .nav-container {
-            display: flex;
-            align-items: center;
-            margin-right: 20px;
-            margin-left: auto;
-            gap: 20px;
-        }
-
-        /* Mobile Styles */
+        /* IMPROVED Mobile Styles */
         @media (max-width: 768px) {
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .site-logo h3 {
+                font-size: 1.5rem;
+            }
+
             .main-nav {
                 position: fixed;
                 top: 70px;
                 left: 0;
                 width: 100%;
+                height: calc(100vh - 70px);
                 background-color: rgba(61, 74, 63, 0.98);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
-                padding: 20px 0;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 40px 0;
                 gap: 0;
-                transform: translateY(-100%);
+                transform: translateX(-100%);
                 transition: transform 0.3s ease;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                z-index: 999;
+                overflow-y: auto;
             }
 
             .main-nav.active {
-                transform: translateY(0);
+                transform: translateX(0);
             }
 
             .main-nav li {
                 width: 100%;
                 text-align: center;
+                margin-bottom: 10px;
             }
 
             .nav-link {
                 display: block;
-                padding: 15px 20px;
+                padding: 20px 40px;
                 border-radius: 0;
+                font-size: 1.1rem;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                width: 100%;
+                transition: all 0.3s ease;
+            }
+
+            .nav-link:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #d53f8c;
             }
 
             .mobile-menu-toggle {
                 display: block;
+                z-index: 1001;
             }
 
             h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
 
             .hero-date {
@@ -543,13 +591,36 @@
                 padding: 30px 20px;
             }
 
-            .header-container {
-                padding: 0 15px;
+            .section {
+                padding: 60px 15px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .site-logo h3 {
+                font-size: 1.3rem;
+            }
+
+            .nav-link {
+                padding: 18px 30px;
+                font-size: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Overlay for mobile menu -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
     <!-- Fixed Header -->
     <header class="site-header">
         <div class="header-container">
@@ -988,40 +1059,61 @@
             });
         });
 
-        // Mobile menu toggle and smooth scrolling
+        // IMPROVED Mobile menu toggle and smooth scrolling
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const mainNav = document.getElementById('mainNav');
+            const menuOverlay = document.getElementById('menuOverlay');
             const navLinks = document.querySelectorAll('.nav-link');
+            const body = document.body;
             
             // Toggle mobile menu
             mobileMenuToggle.addEventListener('click', function() {
-                mainNav.classList.toggle('active');
-                // Change hamburger icon
-                this.innerHTML = mainNav.classList.contains('active') ? '✕' : '☰';
+                const isActive = mainNav.classList.contains('active');
+                
+                if (isActive) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
             });
+            
+            function openMenu() {
+                mainNav.classList.add('active');
+                menuOverlay.classList.add('active');
+                body.classList.add('menu-open');
+                mobileMenuToggle.innerHTML = '✕';
+            }
+            
+            function closeMenu() {
+                mainNav.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                body.classList.remove('menu-open');
+                mobileMenuToggle.innerHTML = '☰';
+            }
+            
+            // Close menu when clicking overlay
+            menuOverlay.addEventListener('click', closeMenu);
             
             // Handle navigation clicks
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
                     
-                    // Only handle internal links
+                    // Close mobile menu when clicking any link
+                    if (window.innerWidth <= 768) {
+                        closeMenu();
+                    }
+                    
+                    // Handle internal links
                     if (href.startsWith('#')) {
                         e.preventDefault();
                         
-                        // Close mobile menu if open
-                        if (mainNav.classList.contains('active')) {
-                            mainNav.classList.remove('active');
-                            mobileMenuToggle.innerHTML = '☰';
-                        }
-                        
-                        // Smooth scroll to section
                         const targetId = href.substring(1);
                         const targetSection = document.getElementById(targetId);
                         
                         if (targetSection) {
-                            const headerHeight = 70; // Fixed header height
+                            const headerHeight = 70;
                             const offsetPosition = targetSection.offsetTop - headerHeight;
                             
                             window.scrollTo({
@@ -1033,11 +1125,17 @@
                 });
             });
 
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('header') && mainNav.classList.contains('active')) {
-                    mainNav.classList.remove('active');
-                    mobileMenuToggle.innerHTML = '☰';
+            // Close menu when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    closeMenu();
+                }
+            });
+
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                    closeMenu();
                 }
             });
         });
