@@ -321,6 +321,14 @@
             color: #d53f8c;
         }
 
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #fdfdfd;
+            margin-bottom: 60px;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -377,6 +385,10 @@
             .back-home {
                 font-size: 0.9rem;
                 padding: 6px 12px;
+            }
+
+            .section-title {
+                font-size: 2rem;
             }
         }
     </style>
@@ -551,6 +563,28 @@
                 </div>
             </div>
         </div>
+        <!-- Location Section -->
+        <br>
+        <br>
+        <section class="section" id="location">
+            <h2 class="section-title">Ubicación</h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1704605582384!2d-75.55493308463718!3d6.131703495561088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4683664b3effb3%3A0xf13f8c16c0fbbd33!2sForest%20campestre!5e0!3m2!1sen!2sus!4v1713742500856!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="location-details" style="text-align: center; margin-top: 30px;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: #fcfcfc;">Forest Campestre</h3>
+                <p style="color: #ffffff;">Medellín, Colombia</p>
+                <a href="https://maps.google.com/?q=Forest+campestre+Medellin+Colombia" class="btn" style="margin-top: 20px;">Obtener Direcciones</a>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
