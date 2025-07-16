@@ -669,7 +669,7 @@
                 <nav>
                     <ul class="main-nav" id="mainNav">
                         <li><a href="https://forms.gle/pPqgsLgPofgXn97C6" target="_blank" class="nav-link">RSVP</a></li>
-                        <li><a href="bienvenida" class="nav-link">BIENVENIDA</a></li>
+                        <li><a href="{% url 'eternalvows' %}" class="nav-link">BIENVENIDA</a></li>
                         <li><a href="{% url 'itinerario' %}" class="nav-link">ITINERARIO</a></li>
                         <li><a href="{% url 'viaje_y_alojamiento' %}" class="nav-link">VIAJE Y ALOJAMIENTO</a></li>
                         <li><a href="{% url 'que_hacer_y_donde_ir' %}" class="nav-link">QUE HACER Y DONDE IR</a></li>
@@ -725,20 +725,21 @@
 
     <!-- Our Story Section -->
     <section class="section" id="our-story">
-        <h2 class="section-title">Nuestra Historia</h2>
+        <h2 class="section-title">¡Bienvenidos a Colombia!</h2>
         <div class="our-story">
             <div class="story-image">
                 <img src="{% static 'images/pala_andres.png' %}" alt="Pala and Andres">
             </div>
             <div class="story-content">
-                <p>Nos conocimos una tarde lluviosa en una pequeña cafetería del centro. Lo que empezó como compartir una mesa se convirtió en horas de conversación, risas y el comienzo de nuestro camino juntos.</p>
-                <p>Tres años después, durante un viaje de fin de semana a las montañas, rodeados de hojas de otoño y el aire fresco del otoño, decidimos pasar el resto de nuestras vidas juntos.</p>
-                <p>Ahora estamos emocionados de celebrar nuestro día especial con nuestras personas favoritas. No podemos esperar para compartir este momento contigo.</p>
+                <p>¡Preparen sus pasaportes! Estamos emocionados de celebrar nuestra boda en la hermosa ciudad de Medellín, Colombia, y aún más felices de que vayan a acompañarnos en este momento tan especial. Su presencia lo significa todo para nosotros, y no hay palabras suficientes para agradecerles que se unan a este fin de semana inolvidable.</p>
+                <p>Medellín no fue una elección al azar. <strong>Nos conocimos allí</strong>, y desde entonces, esta ciudad ocupa un lugar muy especial en nuestras vidas. Por eso, decidimos que fuera el escenario de esta celebración: no solo porque creemos que será un destino increíble para disfrutar con todos ustedes, sino porque <strong>fue el lugar donde empezó nuestro amor</strong>, y queremos que ahora forme parte de su historia también.</p>
+                <p>En esta página encontrarán toda la información que necesitan: desde recomendaciones de viaje hasta lo mejor para hacer y ver en la ciudad.</p>
+                <p>¡Estamos contando los días para compartir estos momentos con ustedes!</p>
             </div>
         </div>
     </section>
 
-    <!-- Celebration Section -->
+    <!-- Celebration Section
     <section class="section celebration" id="celebration">
         <h2 class="section-title">La Celebración</h2>
         <div class="events">
@@ -757,7 +758,7 @@
                 <p>Después de la ceremonia, habrá cena, baile y celebración.</p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Spotify Playlist Section -->
     <section class="spotify-section" id="spotify">

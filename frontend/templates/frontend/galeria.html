@@ -1,0 +1,563 @@
+{% load static %}
+<script>
+    // Mobile menu toggle and smooth scrolling
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const body = document.body;
+        
+        // Toggle mobile menu
+        mobileMenuToggle.addEventListener('click', function() {
+            const isActive = mainNav.classList.contains('active');
+            
+            if (isActive) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+        
+        function openMenu() {
+            mainNav.classList.add('active');
+            menuOverlay.classList.add('active');
+            body.classList.add('menu-open');
+            mobileMenuToggle.innerHTML = '✕';
+        }
+        
+        function closeMenu() {
+            mainNav.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            body.classList.remove('menu-open');
+            mobileMenuToggle.innerHTML = '☰';
+        }
+        
+        // Close menu when clicking overlay
+        menuOverlay.addEventListener('click', closeMenu);
+        
+        // Handle navigation clicks
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Close mobile menu when clicking any link
+                if (window.innerWidth <= 768) {
+                    closeMenu();
+                }
+                
+                // Handle internal links
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetId = href.substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        const headerHeight = 70;
+                        const offsetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Close menu when window is resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    });
+</script><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestros Momentos - Paula & Andres</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: #3D4A3F;
+        color: #333;
+        line-height: 1.6;
+        min-height: 100vh;
+        position: relative;
+        padding-top: 70px;
+    }
+
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /* Overlay to close menu when clicking outside */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Background image */
+    .page-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.3;
+        z-index: -2;
+    }
+
+    .page-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(61, 74, 63, 0.8);
+        z-index: -1;
+    }
+
+    /* Fixed Topbar Styles */
+    .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(61, 74, 63, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 15px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .site-logo h3 {
+        color: white;
+        font-size: 2rem;
+        font-weight: 300;
+    }
+
+    .nav-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .main-nav {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 15px;
+    }
+
+    .nav-link {
+        color: white;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 400;
+        transition: color 0.3s ease;
+        padding: 8px 12px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .nav-link:hover {
+        color: #d53f8c;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    /* Header */
+    .header {
+        text-align: center;
+        padding: 60px 20px 40px;
+        background: rgba(61, 74, 63, 0.9);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h1 {
+        font-size: 4rem;
+        font-weight: 300;
+        color: white;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+    }
+
+    .header p {
+        font-size: 1.2rem;
+        color: #E7ECE9;
+        font-weight: 300;
+    }
+
+    /* Gallery Section */
+    .section {
+        padding: 80px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: #fdfdfd;
+        margin-bottom: 60px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+    }
+
+    .gallery-item {
+        overflow: hidden;
+        border-radius: 12px;
+        height: 300px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Back button */
+    .back-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #3D4A3F;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .back-btn:hover {
+        background-color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer */
+    .footer {
+        background-color: rgba(30, 36, 31, 0.9);
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+        margin-top: 40px;
+    }
+
+    .footer p {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+    }
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+        .header-container {
+            padding: 0 15px;
+        }
+
+        .main-nav {
+            gap: 10px;
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            padding: 6px 10px;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .main-nav {
+            gap: 8px;
+        }
+
+        .nav-link {
+            font-size: 0.8rem;
+            padding: 6px 8px;
+        }
+
+        .site-logo h3 {
+            font-size: 1.8rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            padding: 0 15px;
+        }
+
+        .nav-container {
+            margin-left: 0;
+            transform: none;
+        }
+
+        .site-logo {
+            margin-right: 0;
+        }
+
+        .site-logo h3 {
+            font-size: 1.5rem;
+        }
+
+        .main-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background-color: rgba(61, 74, 63, 0.98);
+            backdrop-filter: blur(10px);
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 40px 0;
+            gap: 0;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .main-nav.active {
+            transform: translateX(0);
+        }
+
+        .main-nav li {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 20px 40px;
+            border-radius: 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #d53f8c;
+        }
+
+        .mobile-menu-toggle {
+            display: block;
+            z-index: 1001;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+        }
+
+        .section {
+            padding: 60px 15px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .gallery {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            height: 250px;
+        }
+
+        .back-btn {
+            top: 15px;
+            left: 15px;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .site-logo h3 {
+            font-size: 1.3rem;
+        }
+
+        .nav-link {
+            padding: 18px 30px;
+            font-size: 1rem;
+        }
+
+        .header {
+            padding: 40px 15px 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+        }
+
+        .gallery {
+            grid-template-columns: 1fr;
+        }
+
+        .gallery-item {
+            height: 280px;
+        }
+    }
+</style>
+</head>
+<body>
+<!-- Overlay for mobile menu -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<!-- Fixed Header -->
+<header class="site-header">
+    <div class="header-container">
+        <div class="site-logo">
+            <h3>A&P</h3>
+        </div>
+        <div class="nav-container">
+            <nav>
+                <ul class="main-nav" id="mainNav">
+                    <li><a href="https://forms.gle/pPqgsLgPofgXn97C6" target="_blank" class="nav-link">RSVP</a></li>
+                    <li><a href="{% url 'eternalvows' %}" class="nav-link">BIENVENIDA</a></li>
+                    <li><a href="{% url 'itinerario' %}" class="nav-link">ITINERARIO</a></li>
+                    <li><a href="{% url 'viaje_y_alojamiento' %}" class="nav-link">VIAJE Y ALOJAMIENTO</a></li>
+                    <li><a href="{% url 'que_hacer_y_donde_ir' %}" class="nav-link">QUE HACER Y DONDE IR</a></li>
+                    <li><a href="{% url 'nuestro_deseo' %}" class="nav-link">NUESTRO DESEO</a></li>
+                    <li><a href="{% url 'galeria' %}" class="nav-link">GALERIA</a></li>
+                    <li><a href="{% url 'preguntas_frecuentes' %}" class="nav-link">PREGUNTAS FRECUENTES</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+    </div>
+</header>
+
+<!-- Background image -->
+<img src="{% static 'images/wedding_background10.jpeg' %}" alt="Wedding Background" class="page-background">
+<div class="page-overlay"></div>
+
+<!-- Back button -->
+<a href="javascript:history.back()" class="back-btn">← Volver</a>
+
+<!-- Header -->
+<header class="header">
+    <h1>Andres & Paula</h1>
+    <p>Nuestros Momentos Especiales</p>
+</header>
+
+<!-- Gallery Section -->
+<section class="section" id="gallery">
+    <h2 class="section-title">Nuestros Momentos</h2>
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="{% static 'images/our_moments1.png' %}" alt="Paula and Andres - Momento 1">
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'images/our_moments2.png' %}" alt="Paula and Andres - Momento 2">
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'images/our_moments3.png' %}" alt="Paula and Andres - Momento 3">
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'images/our_moments4.png' %}" alt="Paula and Andres - Momento 4">
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'images/our_moments5.png' %}" alt="Paula and Andres - Momento 5">
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'images/our_moments6.png' %}" alt="Paula and Andres - Momento 6">
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>¡Estamos deseando celebrar contigo!</p>
+    <p>#PaulaAndAndres2026</p>
+</footer>
+</body>
+</html>
