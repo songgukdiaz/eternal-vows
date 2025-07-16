@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Deseo - Paula & Andres Wedding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #3D4A3F;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #fdfdfd;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #fbfbfb;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content Container */
+        .content-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 50px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .intro-text strong {
+            color: #d53f8c;
+        }
+
+        /* Gift Options Section */
+        .gift-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .gift-option {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .gift-option:hover {
+            border-color: #d53f8c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(213, 63, 140, 0.1);
+        }
+
+        .gift-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #d53f8c;
+        }
+
+        .gift-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .gift-details {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .account-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 4px solid #d53f8c;
+        }
+
+        .account-info strong {
+            color: #333;
+        }
+
+        .coming-soon {
+            color: #999;
+            font-style: italic;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        /* Special Note Section */
+        .special-note {
+            background-color: #fdf2f8;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid #f8d7da;
+        }
+
+        .special-note h3 {
+            color: #d53f8c;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .special-note p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        /* PayPal Button */
+        .paypal-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #0070ba;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 12px rgba(0, 112, 186, 0.3);
+        }
+
+        .paypal-btn:hover {
+            background-color: #005ea6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 112, 186, 0.4);
+        }
+
+        .paypal-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .contact-section p {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #fcfcfc;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            background-color: #25D366;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 35px;
+            border-radius: 50px;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1aa952;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            color: #fcfcfc;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .footer .hashtag {
+            color: #d53f8c;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .content-container {
+                padding: 30px 20px;
+            }
+
+            .intro-text {
+                font-size: 1.1rem;
+            }
+
+            .gift-options {
+                grid-template-columns: 1fr;
+            }
+
+            .gift-option {
+                padding: 20px;
+            }
+
+            .gift-title {
+                font-size: 1.2rem;
+            }
+
+            .gift-details {
+                font-size: 1rem;
+            }
+
+            .special-note {
+                padding: 20px;
+            }
+
+            .special-note h3 {
+                font-size: 1.3rem;
+            }
+
+            .special-note p {
+                font-size: 1rem;
+            }
+
+            .contact-section p {
+                font-size: 1.1rem;
+            }
+
+            .whatsapp-btn {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+
+            .whatsapp-icon {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-container {
+                padding: 25px 15px;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+            }
+
+            .gift-icon {
+                font-size: 2rem;
+            }
+
+            .gift-title {
+                font-size: 1.1rem;
+            }
+
+            .gift-details {
+                font-size: 0.95rem;
+            }
+
+            .paypal-btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+
+            .whatsapp-btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Nuestro Deseo</h1>
+            <p>Tu presencia es el mejor regalo que podríamos pedir</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-container">
+            <div class="intro-text">
+                <p>Muchos de ustedes viajan desde lejos para celebrar con nosotros en Medellín. <strong>Su presencia es el mejor regalo que podríamos pedir</strong> y significa todo para nosotros. Si además desean ser parte de nuestro futuro con un detalle especial, aquí les compartimos algunas formas para hacerlo:</p>
+            </div>
+
+            <!-- Gift Options -->
+            <div class="gift-options">
+                <!-- PayPal Option -->
+                <div class="gift-option">
+                    <div class="gift-icon">💳</div>
+                    <h3 class="gift-title">PayPal</h3>
+                    <div class="gift-details">
+                        <p>La forma más fácil y segura de enviar un regalo desde cualquier parte del mundo.</p>
+                        <div class="account-info">
+                            <strong>@elaineHidalgo87</strong>
+                        </div>
+                        <a href="https://paypal.me/elaineHidalgo87" target="_blank" class="paypal-btn">
+                            <span class="paypal-icon">💰</span>
+                            Enviar por PayPal
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mexican Account -->
+                <div class="gift-option">
+                    <div class="gift-icon">🇲🇽</div>
+                    <h3 class="gift-title">Cuenta Mexicana</h3>
+                    <div class="gift-details">
+                        <p>Para nuestros invitados que se encuentran en México.</p>
+                        <div class="coming-soon">
+                            <strong>Información próximamente</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colombian Account -->
+                <div class="gift-option">
+                    <div class="gift-icon">🇨🇴</div>
+                    <h3 class="gift-title">Cuenta Colombiana</h3>
+                    <div class="gift-details">
+                        <p>Para nuestros invitados que se encuentran en Colombia.</p>
+                        <div class="coming-soon">
+                            <strong>Información próximamente</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lluvia de Sobres -->
+                <div class="gift-option">
+                    <div class="gift-icon">💌</div>
+                    <h3 class="gift-title">Lluvia de Sobres</h3>
+                    <div class="gift-details">
+                        <p>Tradicional forma de celebrar con los novios el día de la boda.</p>
+                        <div class="account-info">
+                            <strong>Serán bienvenidos el día del evento en el lugar de la celebración</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Note -->
+            <div class="special-note">
+                <h3>💕 Recordatorio Especial</h3>
+                <p>
+                    Lo más importante para nosotros es que puedan acompañarnos en este día tan especial. 
+                    Cualquier detalle que nos quieran dar será recibido con mucho amor y agradecimiento, 
+                    pero su presencia ya es el regalo más valioso que podríamos recibir.
+                </p>
+            </div>
+        </div>
+
+        <!-- WhatsApp Contact Button -->
+        <div class="contact-section">
+            <p>¿Preguntas sobre regalos? Contacta al coordinador:</p>
+            <a href="https://wa.me/573104109475" target="_blank" class="whatsapp-btn">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Enviar mensaje por WhatsApp
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>¡Estamos deseando celebrar contigo!</p>
+            <p class="hashtag">#PaulaAndAndres2026</p>
+        </div>
+    </div>
+</body>
+</html>
