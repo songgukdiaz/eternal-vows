@@ -415,16 +415,12 @@
         }
 
         .header-container {
-            max-width: 1200px;
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 10px;
-        }
-
-        .site-logo {
-            margin-right: 350px;
         }
 
         .site-logo h3 {
@@ -436,8 +432,6 @@
         .nav-container {
             display: flex;
             align-items: center;
-            margin-left: auto;
-            transform: translateX(100px);
         }
 
         .main-nav {
@@ -445,7 +439,7 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: 20px;
+            gap: 15px;
         }
 
         .nav-link {
@@ -505,6 +499,38 @@
 
         .alert.fade-out {
             opacity: 0;
+        }
+
+        /* Large tablets and small laptops (1024px and below) */
+        @media (max-width: 1024px) {
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .main-nav {
+                gap: 10px;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+            }
+        }
+
+        /* Medium tablets and smaller laptops (900px and below) */
+        @media (max-width: 900px) {
+            .main-nav {
+                gap: 8px;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+            }
+
+            .site-logo h3 {
+                font-size: 1.8rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -650,7 +676,6 @@
                         <li><a href="{% url 'nuestro_deseo' %}" class="nav-link">NUESTRO DESEO</a></li>
                         <li><a href="{% url 'galeria' %}" class="nav-link">GALERIA</a></li>
                         <li><a href="{% url 'preguntas_frecuentes' %}" class="nav-link">PREGUNTAS FRECUENTES</a></li>
-                        <li><a href="{% url 'logout' %}" class="nav-link">Cerrar Sesión</a></li>
                     </ul>
                 </nav>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
