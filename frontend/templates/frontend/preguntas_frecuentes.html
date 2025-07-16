@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - Paula & Andres Wedding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #3D4A3F;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #fdfdfd;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #fbfbfb;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* FAQ Section Styles */
+        .faq-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f3e8ec;
+        }
+        
+        .faq-question {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 20px 15px;
+            position: relative;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: #d53f8c;
+        }
+        
+        .faq-icon {
+            font-size: 1.5rem;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 15px;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .faq-answer.show {
+            max-height: 1000px;
+            padding: 0 15px 20px;
+        }
+        
+        .faq-answer p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .faq-answer li {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer em {
+            font-style: italic;
+            color: #d53f8c;
+        }
+
+        /* WhatsApp Contact Button */
+        .contact-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .contact-section p {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #fcfcfc;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            background-color: #25D366;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 35px;
+            border-radius: 50px;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1aa952;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            color: #fcfcfc;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .footer .hashtag {
+            color: #d53f8c;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .faq-container {
+                padding: 30px 20px;
+            }
+
+            .faq-question {
+                font-size: 1.1rem;
+                padding: 15px 10px;
+            }
+
+            .faq-answer {
+                padding: 0 10px;
+            }
+
+            .faq-answer.show {
+                padding: 0 10px 15px;
+            }
+
+            .faq-answer p, .faq-answer li {
+                font-size: 1rem;
+            }
+
+            .contact-section p {
+                font-size: 1.1rem;
+            }
+
+            .whatsapp-btn {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+
+            .whatsapp-icon {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .faq-question {
+                font-size: 1rem;
+                padding: 12px 8px;
+            }
+
+            .faq-answer p, .faq-answer li {
+                font-size: 0.95rem;
+            }
+
+            .whatsapp-btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Preguntas Frecuentes</h1>
+            <p>Encuentra respuestas a las preguntas más comunes sobre nuestra celebración en Medellín</p>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-container">
+            
+            <!-- FAQ Item 1 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Cuál es el clima en Medellín?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Medellín tiene un clima primaveral durante todo el año, con temperaturas entre 22°C y 28°C. Durante el día suele ser cálido y por las noches puede refrescar un poco. Recomendamos llevar ropa ligera y una chaqueta liviana, por si acaso.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Qué tipo de ropa debo llevar para la boda?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>El código de vestimenta es <em>elegante/cóctel</em>.</p>
+                    <p>Para ellas: vestidos formales (cortos o largos) o conjuntos de noche.</p>
+                    <p>Para ellos: pantalón formal con camisa (el traje es opcional).</p>
+                    <p>Tip: Si la boda es al aire libre, evita tacones delgados que se hundan en el césped.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Es segura Medellín?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Sí, Medellín ha avanzado muchísimo en seguridad. Las zonas más recomendadas para moverse con tranquilidad son <em>El Poblado, Provenza, Laureles</em> y alrededores turísticos.</p>
+                    <p>Como en toda ciudad grande, sugerimos usar transporte confiable (Uber, DiDi o taxis autorizados), no mostrar objetos de valor y tener precauciones básicas.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Qué llevo en mi maleta para los otros días?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Colombia —y especialmente Medellín— se caracteriza por su excelente moda, así que aprovecha para ir de compras. Hay muchas marcas locales increíbles y centros comerciales modernos como <em>El Tesoro, Santa Fe, Oviedo</em> o <em>Viva Envigado</em>.</p>
+                    <p>Aquí lo esencial para tu viaje:</p>
+                    <ul>
+                        <li>Ropa fresca y cómoda para el día</li>
+                        <li>Zapatos para caminar</li>
+                        <li>Ropa de baño (por si visitas termales o una finca con piscina)</li>
+                        <li>Chaqueta liviana o impermeable (por si llueve)</li>
+                        <li>Bloqueador solar y repelente</li>
+                        <li>Algo más elegante para salidas nocturnas o cenas</li>
+                        <li>¡Espacio en la maleta para tus nuevas compras!</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 5 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Qué planes recomendamos en Medellín o alrededores?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <ul>
+                        <li><em>Comuna 13:</em> arte urbano, historia y mucha cultura</li>
+                        <li><em>Pueblito Paisa:</em> arquitectura tradicional con una vista panorámica</li>
+                        <li><em>Guatapé y la Piedra del Peñol:</em> colores, paisajes y aventura a solo 2 horas</li>
+                        <li><em>Santa Fe de Antioquia:</em> pueblo colonial con clima cálido</li>
+                        <li><em>Parque Arví:</em> ideal para caminatas y picnic en la naturaleza</li>
+                        <li><em>Zonas como Provenza o Laureles:</em> llenas de buenos restaurantes, cafés y tiendas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 6 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Y después de la boda?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>¡Como es Semana Santa, es el momento perfecto para seguir viajando por Colombia! Si tienes tiempo, te recomendamos extender tu viaje y conocer otros destinos increíbles:</p>
+                    <ul>
+                        <li><em>Cartagena:</em> murallas coloniales, playa y excelente gastronomía</li>
+                        <li><em>Eje Cafetero (Salento, Filandia, Valle de Cocora):</em> paisajes espectaculares y cultura cafetera</li>
+                        <li><em>Santa Marta y Parque Tayrona:</em> montañas, selva y mar en un solo lugar</li>
+                        <li><em>Villa de Leyva:</em> arquitectura colonial, tranquilidad y vino artesanal</li>
+                        <li><em>San Andrés:</em> playas caribeñas con mar de siete colores</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 7 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Dónde me puedo quedar?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Las mejores zonas para hospedarse en Medellín son:</p>
+                    <ul>
+                        <li><em>El Poblado:</em> moderno, seguro, con muchas opciones de restaurantes y tiendas</li>
+                        <li><em>Provenza:</em> ideal para quienes buscan vida nocturna, cafés y estilo</li>
+                        <li><em>Laureles:</em> una opción más tranquila, con buena oferta gastronómica y local</li>
+                    </ul>
+                    <p>Muy pronto estaremos agregando <em>links directos a nuestros hoteles recomendados</em> en la sección "Alojamiento" de esta página. ¡Espéralos!</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 8 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Dónde será la ceremonia y la recepción?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Ambas se llevarán a cabo en Forest Campestre, ubicado en Medellín, Colombia.</p>
+                    <p>Habrá transporte disponible desde puntos estratégicos de la ciudad, o puedes llegar en tu propio vehículo (habrá parqueadero).</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 9 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿A qué hora debemos llegar?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Te recomendamos llegar al menos <em>30 minutos antes</em> de la ceremonia, que comenzará a las 4:00 PM.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 10 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Puedo llevar acompañante o niños?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Será una celebración <em>solo para adultos</em>. Gracias por entender que queremos que todos se relajen y disfruten al máximo.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 11 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Qué pasa si llueve?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>No te preocupes, tenemos un <em>plan alterno cubierto</em>. ¡La fiesta sigue sin importar el clima!</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 12 -->
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Debo confirmar mi asistencia?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Sí, por favor confírmanos antes del 1 de febrero de 2026 en la sección "RSVP" de esta página. ¡Estamos felices de compartir este día contigo!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WhatsApp Contact Button -->
+        <div class="contact-section">
+            <p>¿Preguntas? Contacta al coordinador:</p>
+            <a href="https://wa.me/573104109475" target="_blank" class="whatsapp-btn">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Enviar mensaje por WhatsApp
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>¡Estamos deseando celebrar contigo!</p>
+            <p class="hashtag">#PaulaAndAndres2026</p>
+        </div>
+    </div>
+
+    <script>
+        // FAQ accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    // Toggle active class on the question
+                    this.classList.toggle('active');
+                    
+                    // Get the answer associated with this question
+                    const answer = this.nextElementSibling;
+                    
+                    // Toggle show class on the answer
+                    answer.classList.toggle('show');
+                    
+                    // Close other open questions if needed
+                    faqQuestions.forEach(otherQuestion => {
+                        if (otherQuestion !== question) {
+                            otherQuestion.classList.remove('active');
+                            otherQuestion.nextElementSibling.classList.remove('show');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
