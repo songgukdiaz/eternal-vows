@@ -432,7 +432,8 @@
         .nav-container {
             display: flex;
             align-items: center;
-            margin: 0 250px;
+            margin-left: auto;
+            margin-right: 250px;
         }
 
         .main-nav {
@@ -505,6 +506,10 @@
 
         /* IMPROVED Mobile Styles */
         @media (max-width: 768px) {
+            .nav-container {
+                margin-right: 0;
+            }
+
             .header-container {
                 padding: 0 15px;
             }
