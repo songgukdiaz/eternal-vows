@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,20 +21,137 @@
             background: #3D4A3F;
             color: #333;
             line-height: 1.6;
-            padding: 40px 20px;
+            min-height: 100vh;
+            position: relative;
+            padding-top: 70px;
+        }
+
+        /* Prevent body scroll when menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        /* Overlay to close menu when clicking outside */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Background image */
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: -2;
+        }
+
+        .page-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(61, 74, 63, 0.8);
+            z-index: -1;
+        }
+
+        /* Fixed Topbar Styles */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(61, 74, 63, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo h3 {
+            color: white;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 15px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            color: #d53f8c;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        .header {
+        .page-header {
             text-align: center;
             margin-bottom: 60px;
         }
 
-        .header h1 {
+        .page-header h1 {
             font-size: 3rem;
             font-weight: 300;
             color: #fdfdfd;
@@ -41,7 +159,7 @@
             letter-spacing: 2px;
         }
 
-        .header p {
+        .page-header p {
             font-size: 1.2rem;
             color: #fbfbfb;
             max-width: 600px;
@@ -240,17 +358,114 @@
             font-weight: 500;
         }
 
-        /* Responsive Design */
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .main-nav {
+                gap: 10px;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .main-nav {
+                gap: 8px;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+            }
+
+            .site-logo h3 {
+                font-size: 1.8rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            body {
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .nav-container {
+                margin-left: 0;
+                transform: none;
+            }
+
+            .site-logo {
+                margin-right: 0;
+            }
+
+            .site-logo h3 {
+                font-size: 1.5rem;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: rgba(61, 74, 63, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 40px 0;
+                gap: 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                z-index: 999;
+                overflow-y: auto;
+            }
+
+            .main-nav.active {
+                transform: translateX(0);
+            }
+
+            .main-nav li {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .nav-link {
+                display: block;
+                padding: 20px 40px;
+                border-radius: 0;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                width: 100%;
+                transition: all 0.3s ease;
+            }
+
+            .nav-link:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #d53f8c;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                z-index: 1001;
+            }
+
+            .container {
                 padding: 20px 15px;
             }
 
-            .header h1 {
+            .page-header h1 {
                 font-size: 2.5rem;
             }
 
-            .header p {
+            .page-header p {
                 font-size: 1.1rem;
             }
 
@@ -306,7 +521,16 @@
         }
 
         @media (max-width: 480px) {
-            .header h1 {
+            .site-logo h3 {
+                font-size: 1.3rem;
+            }
+
+            .nav-link {
+                padding: 18px 30px;
+                font-size: 1rem;
+            }
+
+            .page-header h1 {
                 font-size: 2rem;
             }
 
@@ -343,9 +567,40 @@
     </style>
 </head>
 <body>
+    <!-- Overlay for mobile menu -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Fixed Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-logo">
+                <h3>A&P</h3>
+            </div>
+            <div class="nav-container">
+                <nav>
+                    <ul class="main-nav" id="mainNav">
+                        <li><a href="https://forms.gle/pPqgsLgPofgXn97C6" target="_blank" class="nav-link">RSVP</a></li>
+                        <li><a href="#" class="nav-link">BIENVENIDA</a></li>
+                        <li><a href="#" class="nav-link">ITINERARIO</a></li>
+                        <li><a href="#" class="nav-link">VIAJE Y ALOJAMIENTO</a></li>
+                        <li><a href="#" class="nav-link">QUE HACER Y DONDE IR</a></li>
+                        <li><a href="#" class="nav-link">NUESTRO DESEO</a></li>
+                        <li><a href="#" class="nav-link">GALERIA</a></li>
+                        <li><a href="#" class="nav-link">PREGUNTAS FRECUENTES</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Background image -->
+    <img src="{% static 'images/wedding_background10.jpeg' %}" alt="Wedding Background" class="page-background">
+    <div class="page-overlay"></div>
+
     <div class="container">
         <!-- Header -->
-        <div class="header">
+        <div class="page-header">
             <h1>Nuestro Deseo</h1>
             <p>Tu presencia es el mejor regalo que podríamos pedir</p>
         </div>
@@ -439,5 +694,121 @@
             <p class="hashtag">#PaulaAndAndres2026</p>
         </div>
     </div>
+
+    <script>
+        // Mobile menu toggle and smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainNav = document.getElementById('mainNav');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const body = document.body;
+            
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', function() {
+                const isActive = mainNav.classList.contains('active');
+                
+                if (isActive) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+            
+            function openMenu() {
+                mainNav.classList.add('active');
+                menuOverlay.classList.add('active');
+                body.classList.add('menu-open');
+                mobileMenuToggle.innerHTML = '✕';
+            }
+            
+            function closeMenu() {
+                mainNav.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                body.classList.remove('menu-open');
+                mobileMenuToggle.innerHTML = '☰';
+            }
+            
+            // Close menu when clicking overlay
+            menuOverlay.addEventListener('click', closeMenu);
+            
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    // Close mobile menu when clicking any link
+                    if (window.innerWidth <= 768) {
+                        closeMenu();
+                    }
+                    
+                    // Handle internal links
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        
+                        const targetId = href.substring(1);
+                        const targetSection = document.getElementById(targetId);
+                        
+                        if (targetSection) {
+                            const headerHeight = 70;
+                            const offsetPosition = targetSection.offsetTop - headerHeight;
+                            
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Close menu when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    closeMenu();
+                }
+            });
+
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+        });
+
+        // Add hover effects to gift options
+        document.querySelectorAll('.gift-option').forEach(option => {
+            option.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            option.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe gift options
+        document.querySelectorAll('.gift-option').forEach(option => {
+            option.style.opacity = '0';
+            option.style.transform = 'translateY(30px)';
+            option.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(option);
+        });
+    </script>
 </body>
 </html>
