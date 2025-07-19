@@ -1,91 +1,8 @@
+{% extends 'frontend/base.html' %}
 {% load static %}
-<script>
-    // Mobile menu toggle and smooth scrolling
-    document.addEventListener('DOMContentLoaded', function() {
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const mainNav = document.getElementById('mainNav');
-        const menuOverlay = document.getElementById('menuOverlay');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const body = document.body;
-        
-        // Toggle mobile menu
-        mobileMenuToggle.addEventListener('click', function() {
-            const isActive = mainNav.classList.contains('active');
-            
-            if (isActive) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
-        
-        function openMenu() {
-            mainNav.classList.add('active');
-            menuOverlay.classList.add('active');
-            body.classList.add('menu-open');
-            mobileMenuToggle.innerHTML = '✕';
-        }
-        
-        function closeMenu() {
-            mainNav.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            body.classList.remove('menu-open');
-            mobileMenuToggle.innerHTML = 'Menú';
-        }
-        
-        // Close menu when clicking overlay
-        menuOverlay.addEventListener('click', closeMenu);
-        
-        // Handle navigation clicks
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                
-                // Close mobile menu when clicking any link
-                if (window.innerWidth <= 768) {
-                    closeMenu();
-                }
-                
-                // Handle internal links
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    
-                    const targetId = href.substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    
-                    if (targetSection) {
-                        const headerHeight = 70;
-                        const offsetPosition = targetSection.offsetTop - headerHeight;
-                        
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
+{% block title %}Nuestros Momentos - Paula & Andres Wedding{% endblock %}
+{% block content %}
 
-        // Close menu when window is resized to desktop
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                closeMenu();
-            }
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-    });
-</script><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestros Momentos - Andres & Paula</title>
 <style>
     * {
         margin: 0;
@@ -487,34 +404,7 @@
         }
     }
 </style>
-</head>
-<body>
-<!-- Overlay for mobile menu -->
-<div class="menu-overlay" id="menuOverlay"></div>
 
-<!-- Fixed Header -->
-<header class="site-header">
-    <div class="header-container">
-        <div class="site-logo">
-            <h3>A&P</h3>
-        </div>
-        <div class="nav-container">
-            <nav>
-                <ul class="main-nav" id="mainNav">
-                    <li><a href="https://forms.gle/pPqgsLgPofgXn97C6" target="_blank" class="nav-link">CONFIRMA TU ASISTENCIA AQUÍ</a></li>
-                    <li><a href="{% url 'eternalvows' %}" class="nav-link">BIENVENIDA</a></li>
-                    <li><a href="{% url 'itinerario' %}" class="nav-link">ITINERARIO</a></li>
-                    <li><a href="{% url 'viaje_y_alojamiento' %}" class="nav-link">VIAJE Y ALOJAMIENTO</a></li>
-                    <li><a href="{% url 'que_hacer_y_donde_ir' %}" class="nav-link">QUE HACER Y DONDE IR</a></li>
-                    <li><a href="{% url 'nuestro_deseo' %}" class="nav-link">NUESTRO DESEO</a></li>
-                    <li><a href="{% url 'galeria' %}" class="nav-link">GALERIA</a></li>
-                    <li><a href="{% url 'preguntas_frecuentes' %}" class="nav-link">PREGUNTAS FRECUENTES</a></li>
-                </ul>
-            </nav>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">Menú</button>
-        </div>
-    </div>
-</header>
 
 <!-- Background image -->
 <img src="{% static 'images/wedding_background10.jpeg' %}" alt="Wedding Background" class="page-background">
@@ -551,10 +441,86 @@
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
-    <p>¡Estamos deseando celebrar contigo!</p>
-    <p>#PaulaAndAndres2026</p>
-</footer>
-</body>
-</html>
+<script>
+    // Mobile menu toggle and smooth scrolling
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const body = document.body;
+        
+        // Toggle mobile menu
+        mobileMenuToggle.addEventListener('click', function() {
+            const isActive = mainNav.classList.contains('active');
+            
+            if (isActive) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+        
+        function openMenu() {
+            mainNav.classList.add('active');
+            menuOverlay.classList.add('active');
+            body.classList.add('menu-open');
+            mobileMenuToggle.innerHTML = '✕';
+        }
+        
+        function closeMenu() {
+            mainNav.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            body.classList.remove('menu-open');
+            mobileMenuToggle.innerHTML = 'Menú';
+        }
+        
+        // Close menu when clicking overlay
+        menuOverlay.addEventListener('click', closeMenu);
+        
+        // Handle navigation clicks
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Close mobile menu when clicking any link
+                if (window.innerWidth <= 768) {
+                    closeMenu();
+                }
+                
+                // Handle internal links
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetId = href.substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        const headerHeight = 70;
+                        const offsetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Close menu when window is resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    });
+</script>
+{% endblock %}
